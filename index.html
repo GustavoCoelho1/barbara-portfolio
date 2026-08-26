@@ -1,0 +1,1696 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Barbara Sganga — Ciências Biomédicas</title>
+        <meta
+            name="description"
+            content="Portfólio científico de Barbara Sganga, graduanda em Ciências Biomédicas na USP: pesquisa em genética e cardiologia molecular no InCor, pesquisa clínica no Instituto PENSI e divulgação científica."
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2333402A'/%3E%3Cpath d='M11 6c9 4 9 8 0 12s-9 8 0 12' fill='none' stroke='%23F3ECDD' stroke-width='2'/%3E%3Cpath d='M21 6c-9 4-9 8 0 12s9 8 0 12' fill='none' stroke='%23F3ECDD' stroke-width='2'/%3E%3C/svg%3E"
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,600;1,9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+        <!-- ==========================================================================
+     BIBLIOTECA DE ILUSTRAÇÕES
+     Traço de gravura antiga (prancha anatômica / botânica): linha fina,
+     hachura e detalhe. Todas herdam a cor do contexto via `currentColor`.
+     Para trocar por artefatos finais: substitua o conteúdo do <symbol>
+     mantendo o `id` e o `viewBox` — o CSS não precisa mudar.
+     ========================================================================== -->
+        <svg
+            class="sprite-ilustracoes"
+            aria-hidden="true"
+            focusable="false"
+            width="0"
+            height="0"
+        >
+            <defs>
+                <!-- Coração anatômico: ventrículos, grandes vasos, sulcos e coronárias -->
+                <symbol id="ilu-coracao" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M30 44C22 54 24 70 34 80c4 5 8 8 11 6 11-8 21-20 25-32 4-10 0-20-10-22-12-3-24 2-30 12Z"
+                        />
+                        <path d="M52 31c0-11 4-19 12-19 7 0 10 6 8 12" />
+                        <path d="M44 32c-1-8 1-15 7-17" />
+                        <path d="M35 35c-2-8-2-15 1-20" />
+                        <path d="M66 33c5-3 11-1 12 4 1 5-3 8-7 7" />
+                        <path d="M40 44c6 12 8 26 6 40" stroke-width="1.3" />
+                        <path d="M33 48c9 5 21 5 30-1" stroke-width="1.3" />
+                        <path
+                            d="M45 62c6 1 12-1 17-6"
+                            stroke-width="1.1"
+                            opacity=".8"
+                        />
+                        <path
+                            d="M36 58c3 6 5 12 6 19"
+                            stroke-width="1"
+                            opacity=".65"
+                        />
+                        <path
+                            d="M52 50c2 7 3 14 2 21"
+                            stroke-width="1"
+                            opacity=".65"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Neurônio: soma, dendritos ramificados, axônio mielinizado -->
+                <symbol id="ilu-neuronio" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M30 42c4-5 13-4 15 2 2 6-1 13-7 13-7 0-12-8-8-15Z"
+                        />
+                        <circle cx="37" cy="49" r="3.4" stroke-width="1.2" />
+                        <path d="M31 41c-3-6-7-11-11-15" />
+                        <path d="M24 32c-3-2-7-3-10-2M20 26c-1-4 0-8 2-11" />
+                        <path d="M29 47c-6-1-13-2-18 0" />
+                        <path d="M16 46c-3-3-5-6-5-10M11 47c-3 2-5 5-6 9" />
+                        <path d="M34 57c-2 7-5 13-9 17" />
+                        <path d="M27 69c-3 2-6 3-9 3M25 74c0 3 1 6 3 9" />
+                        <path d="M45 49c11 1 22 3 33 6" />
+                        <ellipse
+                            cx="53"
+                            cy="50.4"
+                            rx="5.2"
+                            ry="3.3"
+                            transform="rotate(8 53 50.4)"
+                            stroke-width="1.2"
+                        />
+                        <ellipse
+                            cx="65"
+                            cy="52.4"
+                            rx="5.2"
+                            ry="3.3"
+                            transform="rotate(10 65 52.4)"
+                            stroke-width="1.2"
+                        />
+                        <ellipse
+                            cx="77"
+                            cy="55"
+                            rx="5.2"
+                            ry="3.3"
+                            transform="rotate(12 77 55)"
+                            stroke-width="1.2"
+                        />
+                        <path
+                            d="M83 56c4-3 8-5 12-5M83 56c4 1 7 3 10 6M83 56c3 3 5 7 5 11"
+                            stroke-width="1.3"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Célula: membrana, núcleo, mitocôndrias, retículo e complexo de Golgi -->
+                <symbol id="ilu-celula" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M50 10c22 0 40 17 40 39 0 24-19 41-41 41C27 90 10 72 10 50c0-23 18-40 40-40Z"
+                        />
+                        <path
+                            d="M50 16c19 0 34 15 34 33 0 20-16 35-35 35-18 0-33-15-33-34 0-19 15-34 34-34Z"
+                            stroke-width="1"
+                            opacity=".55"
+                        />
+                        <circle cx="45" cy="44" r="15" />
+                        <circle cx="45" cy="44" r="5" stroke-width="1.2" />
+                        <path
+                            d="M33 39c3-2 6-3 9-3M56 50c-2 3-5 5-8 6"
+                            stroke-width="1"
+                            opacity=".7"
+                        />
+                        <ellipse
+                            cx="70"
+                            cy="34"
+                            rx="9"
+                            ry="5"
+                            transform="rotate(-24 70 34)"
+                            stroke-width="1.4"
+                        />
+                        <path
+                            d="M65 37c2-3 3-4 5-6m-2 8c2-3 3-4 5-6m-2 8c2-3 3-4 5-6"
+                            stroke-width="1"
+                            opacity=".8"
+                        />
+                        <ellipse
+                            cx="30"
+                            cy="66"
+                            rx="8"
+                            ry="4.6"
+                            transform="rotate(18 30 66)"
+                            stroke-width="1.4"
+                        />
+                        <path
+                            d="M26 65c2-2 3-3 5-4m-3 7c2-2 3-3 5-4"
+                            stroke-width="1"
+                            opacity=".8"
+                        />
+                        <path
+                            d="M60 62c5 1 9 3 12 6M58 68c5 1 9 3 12 6M56 74c5 1 9 3 12 6"
+                            stroke-width="1.2"
+                        />
+                        <path
+                            d="M24 30c4 3 8 4 12 3M22 36c4 3 8 4 12 3"
+                            stroke-width="1.1"
+                            opacity=".75"
+                        />
+                        <circle
+                            cx="27"
+                            cy="30"
+                            r=".9"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                        <circle
+                            cx="33"
+                            cy="32"
+                            r=".9"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                        <circle
+                            cx="25"
+                            cy="36"
+                            r=".9"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Dupla-hélice: fitas em anti-fase e pares de bases -->
+                <symbol id="ilu-helice" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                    >
+                        <path
+                            d="M50 8Q72 8 72 22Q72 36 50 36Q28 36 28 50Q28 64 50 64Q72 64 72 78Q72 92 50 92"
+                        />
+                        <path
+                            d="M50 8Q28 8 28 22Q28 36 50 36Q72 36 72 50Q72 64 50 64Q28 64 28 78Q28 92 50 92"
+                        />
+                        <path
+                            d="M28 22h44M28 50h44M28 78h44"
+                            stroke-width="1.3"
+                        />
+                        <path
+                            d="M38 15h24M38 29h24M38 57h24M38 71h24"
+                            stroke-width="1"
+                            opacity=".6"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Microscópio óptico, prancha de instrumento -->
+                <symbol id="ilu-microscopio" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M22 92h56" />
+                        <path d="M34 92c0-8 5-13 12-14h8c7 1 12 6 12 14" />
+                        <path d="M30 74h34" stroke-width="1.9" />
+                        <path d="M40 74v4h14v-4" stroke-width="1.2" />
+                        <circle cx="47" cy="70" r="2.2" stroke-width="1.2" />
+                        <path d="M47 66v-4" />
+                        <path d="M40 54h14v6l-3 4h-8l-3-4z" />
+                        <path
+                            d="M43 64v-6M51 64v-6"
+                            stroke-width="1"
+                            opacity=".7"
+                        />
+                        <path d="M41 54 36 26M53 54 58 26" />
+                        <path d="M34 26h26" />
+                        <path d="M38 26 40 12h14l2 14" />
+                        <path d="M40 12h14" stroke-width="1.9" />
+                        <path d="M62 78c11-10 12-42 1-58" />
+                        <circle cx="66" cy="60" r="4" stroke-width="1.4" />
+                        <circle
+                            cx="66"
+                            cy="60"
+                            r="1.2"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                        <path d="M28 80h8" stroke-width="1.2" opacity=".7" />
+                    </g>
+                </symbol>
+
+                <!-- Ramo botânico, folhas alternadas com nervura -->
+                <symbol id="ilu-ramo" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M16 94C28 74 38 54 50 36 58 24 66 15 76 8" />
+                        <path d="M30 71c-7 2-14 0-17-6 6-4 14-4 19 1" />
+                        <path
+                            d="M22 68c3 1 7 2 10 3"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path d="M37 60c6-6 8-14 4-20-6 3-9 11-8 18" />
+                        <path
+                            d="M40 44c-1 4-2 9-2 14"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path d="M46 45c-8 1-15-2-17-9 7-2 15 1 18 8" />
+                        <path
+                            d="M32 39c4 2 8 4 12 7"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path d="M54 33c6-5 9-13 6-20-6 3-10 11-9 19" />
+                        <path
+                            d="M57 17c-1 5-2 10-2 15"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path d="M62 24c-7 0-13-4-14-11 7-1 14 3 16 10" />
+                        <path
+                            d="M51 15c4 3 8 5 11 8"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path
+                            d="M72 13c5-3 8-8 7-13-5 1-8 6-8 12"
+                            stroke-width="1.3"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Flor de prancha botânica: corola, estames, folhas -->
+                <symbol id="ilu-flor" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M50 96V48" />
+                        <path d="M50 74c-9 1-16-3-18-11 8-2 16 2 19 9" />
+                        <path
+                            d="M35 65c4 2 9 5 13 8"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path d="M50 62c8-2 13-8 12-16-7 2-12 8-13 15" />
+                        <path
+                            d="M58 50c-3 4-6 8-7 11"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path
+                            d="M50 48c-6 0-11-5-11-10 6-2 11 2 12 8"
+                            transform="rotate(-72 50 41)"
+                        />
+                        <path
+                            d="M50 48c-6 0-11-5-11-10 6-2 11 2 12 8"
+                            transform="rotate(-144 50 41)"
+                        />
+                        <path
+                            d="M50 48c-6 0-11-5-11-10 6-2 11 2 12 8"
+                            transform="rotate(144 50 41)"
+                        />
+                        <path
+                            d="M50 48c-6 0-11-5-11-10 6-2 11 2 12 8"
+                            transform="rotate(72 50 41)"
+                        />
+                        <path d="M50 48c-6 0-11-5-11-10 6-2 11 2 12 8" />
+                        <circle cx="50" cy="41" r="4.5" stroke-width="1.3" />
+                        <path
+                            d="M50 37v-5M46 39l-3-4M54 39l3-4"
+                            stroke-width="1"
+                            opacity=".8"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Borboleta de coleção, com padrão nas asas -->
+                <symbol id="ilu-borboleta" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M50 34v38" />
+                        <path
+                            d="M48 27c-4-5-9-8-13-7M52 27c4-5 9-8 13-7"
+                            stroke-width="1.1"
+                        />
+                        <path
+                            d="M48 38c-6-9-16-14-24-11-7 3-8 12-3 18 5 7 15 10 25 6"
+                        />
+                        <path
+                            d="M52 38c6-9 16-14 24-11 7 3 8 12 3 18-5 7-15 10-25 6"
+                        />
+                        <path
+                            d="M48 54c-5 8-13 14-20 12-5-2-6-8-3-13 4-6 13-8 21-4"
+                        />
+                        <path
+                            d="M52 54c5 8 13 14 20 12 5-2 6-8 3-13-4-6-13-8-21-4"
+                        />
+                        <circle
+                            cx="33"
+                            cy="40"
+                            r="3"
+                            stroke-width="1.1"
+                            opacity=".8"
+                        />
+                        <circle
+                            cx="67"
+                            cy="40"
+                            r="3"
+                            stroke-width="1.1"
+                            opacity=".8"
+                        />
+                        <path
+                            d="M28 47c4 1 8 1 12 0M60 47c4 1 8 1 12 0"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                        <path
+                            d="M34 62c3 1 6 1 9 0M57 62c3 1 6 1 9 0"
+                            stroke-width=".9"
+                            opacity=".7"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Lâmina histológica com etiqueta -->
+                <symbol id="ilu-lamina" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <g transform="rotate(-10 50 50)">
+                            <rect x="14" y="32" width="72" height="36" rx="2" />
+                            <rect
+                                x="20"
+                                y="38"
+                                width="24"
+                                height="24"
+                                rx="1.5"
+                                stroke-width="1.2"
+                            />
+                            <path
+                                d="M24 46c4-3 9-3 13 1M24 52c4-3 9-3 13 1M24 58c4-3 9-3 13 1"
+                                stroke-width=".9"
+                                opacity=".75"
+                            />
+                            <path
+                                d="M52 42h28M52 50h22M52 58h26"
+                                stroke-width="1.1"
+                                opacity=".8"
+                            />
+                        </g>
+                    </g>
+                </symbol>
+
+                <!-- Placa de Petri com colônias -->
+                <symbol id="ilu-placa" viewBox="0 0 100 100">
+                    <g fill="none" stroke="currentColor" stroke-width="1.6">
+                        <circle cx="50" cy="50" r="36" />
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="29"
+                            stroke-width="1.1"
+                            opacity=".7"
+                        />
+                        <circle cx="39" cy="40" r="4.5" />
+                        <circle cx="59" cy="51" r="7" />
+                        <circle
+                            cx="59"
+                            cy="51"
+                            r="3"
+                            stroke-width="1"
+                            opacity=".7"
+                        />
+                        <circle cx="42" cy="62" r="3.2" />
+                        <circle cx="53" cy="35" r="2.2" stroke-width="1.2" />
+                        <circle cx="64" cy="38" r="1.6" stroke-width="1.2" />
+                        <circle cx="35" cy="52" r="1.8" stroke-width="1.2" />
+                    </g>
+                </symbol>
+
+                <!-- Erlenmeyer graduado -->
+                <symbol id="ilu-frasco" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M40 12h20" />
+                        <path
+                            d="M43 12v24L26 78c-2 5 1 10 6 10h36c5 0 8-5 6-10L57 36V12"
+                        />
+                        <path d="M32 62c8-4 20-4 32 0" stroke-width="1.3" />
+                        <path
+                            d="M36 70h5M34 76h5"
+                            stroke-width="1"
+                            opacity=".75"
+                        />
+                        <path d="M45 24h10" stroke-width="1" opacity=".7" />
+                    </g>
+                </symbol>
+
+                <!-- Pipeta volumétrica -->
+                <symbol id="ilu-pipeta" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M42 8h16v14l-4 8v18c0 12-2 24-4 34l-2 10-2-10c-2-10-4-22-4-34V30l-4-8z"
+                        />
+                        <path d="M42 22h16" stroke-width="1.2" />
+                        <path
+                            d="M46 40h8M46 48h8M46 56h8"
+                            stroke-width="1"
+                            opacity=".75"
+                        />
+                    </g>
+                </symbol>
+
+                <!-- Gráfico de dispersão com curva -->
+                <symbol id="ilu-grafico" viewBox="0 0 100 100">
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M18 14v70h68" />
+                        <path
+                            d="M18 30h4M18 46h4M18 62h4M36 84v-4M54 84v-4M72 84v-4"
+                            stroke-width="1"
+                            opacity=".7"
+                        />
+                        <path
+                            d="M26 72C40 68 46 50 58 42s18-10 24-16"
+                            stroke-width="1.4"
+                        />
+                        <circle cx="34" cy="68" r="2.4" />
+                        <circle cx="48" cy="54" r="2.4" />
+                        <circle cx="60" cy="40" r="2.4" />
+                        <circle cx="74" cy="32" r="2.4" />
+                    </g>
+                </symbol>
+
+                <!-- Prancha anotada: coração com chamadas manuscritas, como num caderno -->
+                <symbol id="fig-coracao-anotado" viewBox="0 0 172 116">
+                    <use
+                        href="#ilu-coracao"
+                        x="4"
+                        y="8"
+                        width="100"
+                        height="100"
+                    />
+                    <g
+                        class="fig__chamada"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width=".9"
+                    >
+                        <path d="M70 26h36" />
+                        <circle cx="70" cy="26" r="1.6" fill="currentColor" />
+                        <path d="M82 44h24" />
+                        <circle cx="82" cy="44" r="1.6" fill="currentColor" />
+                        <path d="M52 86h54" />
+                        <circle cx="52" cy="86" r="1.6" fill="currentColor" />
+                    </g>
+                    <text class="fig__rotulo" x="110" y="29">aorta</text>
+                    <text class="fig__rotulo" x="110" y="47">átrio</text>
+                    <text class="fig__rotulo" x="110" y="89">ventrículo</text>
+                </symbol>
+            </defs>
+        </svg>
+
+        <!-- ========================= NAVEGAÇÃO ========================= -->
+        <header class="topo">
+            <a class="topo__marca" href="#hero">Barbara <span>Sganga</span></a>
+
+            <button
+                type="button"
+                class="menu-botao"
+                data-menu
+                aria-expanded="false"
+                aria-controls="menu-principal"
+            >
+                <span class="menu-botao__icone" aria-hidden="true"></span>
+                <span class="menu-botao__rotulo">Menu</span>
+            </button>
+
+            <nav
+                class="topo__nav"
+                id="menu-principal"
+                aria-label="Seções do site"
+            >
+                <a href="#pesquisa">Pesquisa</a>
+                <a href="#clinica">Pesquisa clínica</a>
+                <a href="#extensao">Divulgação</a>
+                <a href="#trajetoria">Trajetória</a>
+                <a href="#mapa">Mapa</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </header>
+
+        <main id="conteudo">
+            <!-- ========================= 01 · HERO ========================= -->
+            <section class="secao secao--hero" id="hero">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <div class="hero">
+                    <div class="hero__texto">
+                        <p class="hero__kicker">Ciências Biomédicas · USP</p>
+
+                        <h1 class="hero__titulo">
+                            <span class="hero__recorte">
+                                <span class="hero__nome">Barbara</span>
+                                <span class="hero__sobrenome">Sganga</span>
+                            </span>
+                        </h1>
+
+                        <p class="hero__bio">
+                            Pesquisa entre a bancada e a clínica. Genética e
+                            cardiologia molecular no InCor como bolsista FAPESP,
+                            pesquisa clínica no Instituto PENSI e divulgação
+                            científica para quem costuma ficar de fora dela.
+                        </p>
+
+                        <p class="hero__intencao">
+                            Meu caminho é a <strong>pesquisa clínica</strong> —
+                            em centros de pesquisa, CROs e indústria
+                            farmacêutica.
+                        </p>
+
+                        <div class="hero__acoes">
+                            <a
+                                class="botao botao--principal"
+                                href="https://www.linkedin.com/in/barbara-sganga-7454a9285/"
+                                target="_blank"
+                                rel="noopener"
+                                >LinkedIn</a
+                            >
+                            <a
+                                class="botao"
+                                href="assets/docs/curriculo-barbara-sganga-en.pdf"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                Currículo
+                                <span class="botao__nota">PDF · inglês</span>
+                            </a>
+                            <a class="botao botao--fantasma" href="#contato"
+                                >Contato</a
+                            >
+                        </div>
+
+                        <ul class="numeros">
+                            <li><strong>3</strong> anos de bancada</li>
+                            <li><strong>2</strong> laboratórios</li>
+                            <li><strong>6</strong> certificações</li>
+                            <li>
+                                <strong>~91h</strong> de formação complementar
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="hero__coluna">
+                        <figure class="hero__foto polaroid rot-2">
+                            <img
+                                src="assets/img/foto_perfil.jpeg"
+                                alt="Retrato de Barbara Sganga"
+                                width="640"
+                                height="800"
+                            />
+                            <figcaption class="polaroid__legenda">
+                                babi sganga :)
+                            </figcaption>
+                        </figure>
+
+                        <!-- SUBSTITUIR (opcional): trocar a citação por uma frase escolhida por ela -->
+                        <aside class="nota-papel fita rot-3">
+                            <p class="nota-papel__texto">
+                                “Olhe fundo na natureza, e então você entenderá
+                                tudo melhor.”
+                            </p>
+                            <p class="nota-papel__autor">
+                                — atribuído a Albert Einstein
+                            </p>
+                        </aside>
+                    </div>
+                </div>
+
+                <div class="hero__ilustracoes" aria-hidden="true">
+                    <span class="ilustra ilustra--coracao" data-entrada>
+                        <svg viewBox="0 0 172 116">
+                            <use href="#fig-coracao-anotado" />
+                        </svg>
+                    </span>
+                    <span class="ilustra ilustra--helice" data-entrada
+                        ><svg><use href="#ilu-helice" /></svg
+                    ></span>
+                    <span class="ilustra ilustra--ramo" data-entrada
+                        ><svg><use href="#ilu-ramo" /></svg
+                    ></span>
+                    <span class="ilustra ilustra--neuronio" data-entrada
+                        ><svg><use href="#ilu-neuronio" /></svg
+                    ></span>
+                </div>
+
+                <span class="transbordo transbordo--placa" aria-hidden="true"
+                    ><svg><use href="#ilu-placa" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 02 · PESQUISA DE BANCADA ========================= -->
+            <section class="secao secao--projetos" id="pesquisa">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho">
+                    <h2 class="titulo-secao">Pesquisa de bancada</h2>
+                    <p class="secao__intro">
+                        Dois laboratórios, dois campos: a genética por trás da
+                        doença cardiovascular e os mecanismos da dor. É onde
+                        aprendi a gerar dado e a duvidar dele.
+                    </p>
+                </header>
+
+                <div class="projetos">
+                    <article class="card card--projeto fita">
+                        <p class="card__indice">
+                            Iniciação científica · 2024 – 2026
+                        </p>
+                        <h3 class="card__titulo">
+                            Genética e Cardiologia Molecular
+                        </h3>
+                        <p class="card__local">
+                            Laboratório de Genética e Cardiologia Molecular ·
+                            InCor-HC FMUSP
+                        </p>
+                        <p class="card__texto">
+                            Participação em projetos de genética e cardiologia
+                            molecular, da coleta à análise dos dados
+                            laboratoriais, incluindo trabalho com modelos
+                            animais.
+                        </p>
+                        <ul class="chips">
+                            <li>Extração de DNA</li>
+                            <li>Genotipagem por PCR</li>
+                            <li>Eletroforese em gel de agarose</li>
+                            <li>Modelos animais</li>
+                        </ul>
+                        <p class="card__resultado">
+                            <span>Fomento</span> Bolsa de iniciação científica
+                            FAPESP
+                        </p>
+                        <span
+                            class="selo-carimbo rot--carimbo"
+                            aria-hidden="true"
+                        >
+                            <span>bolsista<br />FAPESP</span>
+                        </span>
+                    </article>
+
+                    <article class="card card--projeto fita">
+                        <p class="card__indice">Estágio de pesquisa · 2023</p>
+                        <h3 class="card__titulo">
+                            Neuroanatomia Funcional da Dor
+                        </h3>
+                        <p class="card__local">
+                            Laboratório de Neuroanatomia Funcional da Dor ·
+                            ICB-USP
+                        </p>
+                        <p class="card__texto">
+                            Estudo dos mecanismos da dor — anatomia e fisiologia
+                            — e de terapias não farmacológicas, com foco em
+                            exercício físico.
+                        </p>
+                        <ul class="chips">
+                            <li>Neuroanatomia</li>
+                            <li>Fisiologia da dor</li>
+                            <li>Terapias não farmacológicas</li>
+                        </ul>
+                        <p class="card__resultado">
+                            <span>Contexto</span> Primeiro laboratório, ainda no
+                            1º ano da graduação
+                        </p>
+                        <span class="ilustra-solta" aria-hidden="true"
+                            ><svg><use href="#ilu-neuronio" /></svg
+                        ></span>
+                    </article>
+                </div>
+
+                <span
+                    class="ilustra-borda ilustra-borda--flor"
+                    aria-hidden="true"
+                    ><svg><use href="#ilu-flor" /></svg
+                ></span>
+                <span
+                    class="ilustra-borda ilustra-borda--pipeta"
+                    aria-hidden="true"
+                    ><svg><use href="#ilu-pipeta" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 03 · PESQUISA CLÍNICA E INOVAÇÃO ========================= -->
+            <section class="secao secao--parcerias" id="clinica">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho secao__cabecalho--claro">
+                    <h2 class="titulo-secao">Pesquisa clínica e inovação</h2>
+                    <p class="secao__intro">
+                        A ponte entre o laboratório e o mundo: conduzir estudo
+                        dentro das regras, transformar evidência em decisão e
+                        ciência em ferramenta que alguém usa.
+                    </p>
+                </header>
+
+                <div class="selo-brasao" aria-hidden="true">
+                    <svg viewBox="0 0 200 200">
+                        <defs>
+                            <path
+                                id="brasao-curva-topo"
+                                d="M100 100 m-70 0 a70 70 0 1 1 140 0"
+                            />
+                            <path
+                                id="brasao-curva-base"
+                                d="M100 100 m-56 0 a56 56 0 1 0 112 0"
+                            />
+                        </defs>
+                        <circle
+                            class="selo-brasao__anel"
+                            cx="100"
+                            cy="100"
+                            r="88"
+                        />
+                        <circle
+                            class="selo-brasao__anel"
+                            cx="100"
+                            cy="100"
+                            r="80"
+                        />
+                        <text class="selo-brasao__texto">
+                            <textPath
+                                href="#brasao-curva-topo"
+                                startOffset="50%"
+                                text-anchor="middle"
+                            >
+                                PESQUISA APLICADA
+                            </textPath>
+                        </text>
+                        <text class="selo-brasao__texto">
+                            <textPath
+                                href="#brasao-curva-base"
+                                startOffset="50%"
+                                text-anchor="middle"
+                            >
+                                INOVAÇÃO
+                            </textPath>
+                        </text>
+                        <g class="selo-brasao__miolo">
+                            <path d="M74 100h52M100 74v52" />
+                            <circle cx="100" cy="100" r="18" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="cases">
+                    <article class="card card--case fita">
+                        <p class="card__indice">Desde 2026</p>
+                        <h3 class="card__titulo">
+                            Condução de estudos clínicos
+                        </h3>
+                        <p class="tag-parceiro">
+                            Instituto PENSI · Hospital Infantil Sabará
+                        </p>
+                        <dl class="dossie">
+                            <dt>Contexto</dt>
+                            <dd>
+                                Estudos clínicos patrocinados e institucionais,
+                                em centro de pesquisa pediátrico.
+                            </dd>
+                            <dt>Atuação</dt>
+                            <dd>
+                                Organização e acompanhamento de documentos
+                                regulatórios; trabalho com protocolos, termos de
+                                consentimento e fluxo de participantes; coleta,
+                                revisão e organização de dados.
+                            </dd>
+                            <dt>Diferencial</dt>
+                            <dd>
+                                Análise documental e apoio a auditorias —
+                                revisão, identificação de pendências e
+                                elaboração de relatórios.
+                            </dd>
+                        </dl>
+                        <ul class="chips">
+                            <li>Boas Práticas Clínicas</li>
+                            <li>Regulatório</li>
+                            <li>TCLE</li>
+                            <li>Auditoria</li>
+                            <li>Ética em pesquisa</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card--case fita">
+                        <p class="card__indice">2025</p>
+                        <h3 class="card__titulo">
+                            Evidência para decisão estratégica
+                        </h3>
+                        <p class="tag-parceiro">
+                            Fundação José Luiz Setúbal · Pensi Social
+                        </p>
+                        <dl class="dossie">
+                            <dt>Contexto</dt>
+                            <dd>
+                                Departamento de Estratégia, em temas de saúde
+                                pública e saúde da criança.
+                            </dd>
+                            <dt>Atuação</dt>
+                            <dd>
+                                Pesquisa bibliográfica e síntese de evidências
+                                para embasar as decisões da área.
+                            </dd>
+                            <dt>Diferencial</dt>
+                            <dd>
+                                Construção de Teoria da Mudança e estruturação
+                                de indicadores (KPIs) para monitorar e avaliar
+                                iniciativas, com pesquisa de instituições
+                                benchmark.
+                            </dd>
+                        </dl>
+                        <ul class="chips">
+                            <li>Síntese de evidências</li>
+                            <li>Teoria da Mudança</li>
+                            <li>Indicadores (KPIs)</li>
+                            <li>Benchmark</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card--case card--destaque fita">
+                        <p class="card__indice">2025 · projeto de impacto</p>
+                        <h3 class="card__titulo">
+                            Atlas de Histologia para estudantes daltônicos
+                        </h3>
+                        <p class="tag-parceiro">
+                            ICBjr · Empresa Júnior do ICB-USP
+                        </p>
+                        <dl class="dossie">
+                            <dt>Contexto</dt>
+                            <dd>
+                                Lâminas histológicas são estudadas por cor — o
+                                que deixa estudantes daltônicos de fora da
+                                própria disciplina.
+                            </dd>
+                            <dt>Atuação</dt>
+                            <dd>
+                                Liderança do projeto: concepção e
+                                desenvolvimento de uma ferramenta de
+                                acessibilidade para o estudo de lâminas.
+                            </dd>
+                            <dt>Reconhecimento</dt>
+                            <dd>
+                                Projeto aprovado pela Brasil Júnior, a
+                                Confederação Brasileira de Empresas Juniores.
+                            </dd>
+                        </dl>
+                        <ul class="chips">
+                            <li>Acessibilidade</li>
+                            <li>Histologia</li>
+                            <li>Liderança de projeto</li>
+                        </ul>
+                        <span
+                            class="selo-carimbo selo-carimbo--largo rot--carimbo"
+                            aria-hidden="true"
+                        >
+                            <span>aprovado<br />Brasil Júnior</span>
+                        </span>
+                    </article>
+                </div>
+
+                <div class="modalidades">
+                    <h3 class="modalidades__titulo">O que levo para um time</h3>
+                    <ul class="modalidades__lista">
+                        <li class="etiqueta fita">
+                            <svg class="etiqueta__icone" aria-hidden="true">
+                                <use href="#ilu-frasco" />
+                            </svg>
+                            Condução de estudos clínicos
+                        </li>
+                        <li class="etiqueta fita">
+                            <svg class="etiqueta__icone" aria-hidden="true">
+                                <use href="#ilu-helice" />
+                            </svg>
+                            Técnicas moleculares
+                        </li>
+                        <li class="etiqueta fita">
+                            <svg class="etiqueta__icone" aria-hidden="true">
+                                <use href="#ilu-grafico" />
+                            </svg>
+                            Síntese de evidências
+                        </li>
+                        <li class="etiqueta fita">
+                            <svg class="etiqueta__icone" aria-hidden="true">
+                                <use href="#ilu-celula" />
+                            </svg>
+                            Divulgação científica
+                        </li>
+                    </ul>
+                </div>
+
+                <span class="transbordo transbordo--frasco" aria-hidden="true"
+                    ><svg><use href="#ilu-frasco" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 04 · CIÊNCIA QUE SAI DO LABORATÓRIO ========================= -->
+            <section class="secao secao--extensao" id="extensao">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho">
+                    <h2 class="titulo-secao">Ciência que sai do laboratório</h2>
+                    <p class="secao__intro">
+                        Divulgação, ensino e representação. A linha que une tudo
+                        aqui é levar ciência para quem normalmente fica de fora
+                        dela — criança de escola pública, aluno da EJA,
+                        estudante daltônico.
+                    </p>
+                </header>
+
+                <div class="extensao">
+                    <ul class="atividades">
+                        <li class="atividade">
+                            <p class="atividade__periodo">2023 – 2024</p>
+                            <h3 class="atividade__titulo">
+                                Biocientista Mirim
+                            </h3>
+                            <p class="atividade__local">
+                                Projeto de extensão · ICB-USP
+                            </p>
+                            <p class="atividade__texto">
+                                Promoção de letramento científico com alunos e
+                                professores do ensino fundamental e médio, e
+                                desenvolvimento de materiais educativos.
+                            </p>
+                        </li>
+                        <li class="atividade">
+                            <p class="atividade__periodo">2024</p>
+                            <h3 class="atividade__titulo">
+                                TDAH na Educação de Jovens e Adultos
+                            </h3>
+                            <p class="atividade__local">
+                                Atividade de extensão · ICB-USP
+                            </p>
+                            <p class="atividade__texto">
+                                Difusão de informação sobre TDAH para a
+                                comunidade da EJA, com atividades interativas
+                                para consolidar o conteúdo e responder dúvidas.
+                            </p>
+                        </li>
+                        <li class="atividade">
+                            <p class="atividade__periodo">2024 – 2026</p>
+                            <h3 class="atividade__titulo">
+                                Representação discente
+                            </h3>
+                            <p class="atividade__local">
+                                Comissão de Coordenação do Curso · ICB-USP
+                            </p>
+                            <p class="atividade__texto">
+                                Quase dois anos como ponte entre estudantes,
+                                docentes e coordenação, colaborando no
+                                desenvolvimento do curso.
+                            </p>
+                        </li>
+                        <li class="atividade">
+                            <p class="atividade__periodo">2024</p>
+                            <h3 class="atividade__titulo">
+                                Liga Acadêmica de Fisiologia Humana
+                            </h3>
+                            <p class="atividade__local">ICB-USP</p>
+                            <p class="atividade__texto">
+                                Estudo, ensino e difusão de fisiologia humana em
+                                perspectiva integrada.
+                            </p>
+                        </li>
+                        <li class="atividade">
+                            <p class="atividade__periodo">2025</p>
+                            <h3 class="atividade__titulo">
+                                Assessora de projetos na ICBjr
+                            </h3>
+                            <p class="atividade__local">
+                                Empresa Júnior do ICB-USP
+                            </p>
+                            <p class="atividade__texto">
+                                Execução de projetos como análises
+                                microbiológicas e estruturação de sites
+                                institucionais e educacionais, além de formação
+                                em organização, trabalho em equipe e liderança.
+                                Participação em eventos estaduais e nacionais do
+                                movimento empresa júnior.
+                            </p>
+                        </li>
+                    </ul>
+
+                    <aside class="lateral-extensao">
+                        <ul
+                            class="checklist fita rot-2"
+                            aria-label="Princípios de trabalho"
+                        >
+                            <li>observar</li>
+                            <li>perguntar</li>
+                            <li>aprender</li>
+                            <li>compreender</li>
+                            <li class="is-marcado">respeitar a vida</li>
+                        </ul>
+
+                        <span class="ilustra-lateral" aria-hidden="true"
+                            ><svg><use href="#ilu-borboleta" /></svg
+                        ></span>
+                    </aside>
+                </div>
+
+                <div class="formacao">
+                    <h3 class="formacao__titulo">Formação complementar</h3>
+                    <ul class="formacao__lista">
+                        <li class="certificado rot-1">
+                            <p class="certificado__nome">
+                                Biossegurança e Boas Práticas de Laboratório
+                            </p>
+                            <p class="certificado__meta">ICB-USP · 6h</p>
+                        </li>
+                        <li class="certificado rot-3">
+                            <p class="certificado__nome">
+                                Utilização de Animais em Experimentação
+                            </p>
+                            <p class="certificado__meta">ICB-USP · 10h</p>
+                        </li>
+                        <li class="certificado rot-2">
+                            <p class="certificado__nome">
+                                Princípios Éticos e Manejo Animal em Pesquisa
+                                <span>Módulo Roedores e Lagomorfos</span>
+                            </p>
+                            <p class="certificado__meta">ICB-USP · 40h</p>
+                        </li>
+                        <li class="certificado rot-4">
+                            <p class="certificado__nome">
+                                Drogas de Abuso e Tratamento Farmacológico da
+                                Dependência
+                            </p>
+                            <p class="certificado__meta">
+                                ICB-USP · 35h · online
+                            </p>
+                        </li>
+                        <li class="certificado rot-3">
+                            <p class="certificado__nome">
+                                Armazenamento, Manuseio e Descarte de Produtos
+                                Químicos
+                            </p>
+                            <p class="certificado__meta">
+                                ICB-USP · válido até 2027
+                            </p>
+                        </li>
+                        <li class="certificado rot-1">
+                            <p class="certificado__nome">
+                                Curso Introdutório em Pesquisa Clínica
+                            </p>
+                            <p class="certificado__meta">
+                                Hospital Oswaldo Cruz
+                            </p>
+                        </li>
+                    </ul>
+
+                    <p class="idiomas">
+                        <span class="idiomas__rotulo">Idiomas</span>
+                        Inglês avançado (fala, leitura e escrita) · Espanhol
+                        intermediário (leitura)
+                    </p>
+                </div>
+
+                <span
+                    class="ilustra-borda ilustra-borda--ramo"
+                    aria-hidden="true"
+                    ><svg><use href="#ilu-ramo" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 05 · TRAJETÓRIA ========================= -->
+            <section class="secao secao--timeline" id="trajetoria">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho">
+                    <h2 class="titulo-secao">Trajetória</h2>
+                    <p class="secao__intro">
+                        Da primeira bancada à pesquisa clínica, em quatro anos.
+                    </p>
+                </header>
+
+                <ol class="timeline">
+                    <li class="marco" data-anim>
+                        <span class="marco__ponto" aria-hidden="true"></span>
+                        <div class="marco__card fita">
+                            <p class="marco__ano">2023</p>
+                            <h3 class="marco__titulo">Começo na USP</h3>
+                            <p class="marco__texto">
+                                Ingresso em Ciências Biomédicas no ICB-USP. No
+                                mesmo ano, o primeiro laboratório —
+                                Neuroanatomia Funcional da Dor — e o início do
+                                projeto de extensão Biocientista Mirim.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="marco" data-anim>
+                        <span class="marco__ponto" aria-hidden="true"></span>
+                        <div class="marco__card fita">
+                            <p class="marco__ano">2024</p>
+                            <h3 class="marco__titulo">
+                                Bancada e representação
+                            </h3>
+                            <p class="marco__texto">
+                                Início da iniciação científica no InCor-HC
+                                FMUSP, com bolsa FAPESP. Em paralelo:
+                                representação discente, Liga Acadêmica de
+                                Fisiologia Humana e extensão sobre TDAH na EJA.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="marco" data-anim>
+                        <span class="marco__ponto" aria-hidden="true"></span>
+                        <div class="marco__card fita">
+                            <p class="marco__ano">2025</p>
+                            <h3 class="marco__titulo">Projeto e estratégia</h3>
+                            <p class="marco__texto">
+                                Assessoria de projetos na ICBjr e liderança do
+                                Atlas de Histologia para estudantes daltônicos,
+                                aprovado pela Brasil Júnior. No segundo
+                                semestre, estágio na Fundação José Luiz Setúbal.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="marco" data-anim>
+                        <span class="marco__ponto" aria-hidden="true"></span>
+                        <div class="marco__card fita">
+                            <p class="marco__ano">2026</p>
+                            <h3 class="marco__titulo">Pesquisa clínica</h3>
+                            <p class="marco__texto">
+                                Pesquisa clínica no Instituto PENSI, no Hospital
+                                Infantil Sabará. Conclusão da graduação prevista
+                                para dezembro.
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+
+                <span
+                    class="ilustra-borda ilustra-borda--helice"
+                    aria-hidden="true"
+                    ><svg><use href="#ilu-helice" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 06 · MAPA DE ATUAÇÃO ========================= -->
+            <section class="secao secao--mapa" id="mapa">
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho">
+                    <h2 class="titulo-secao">Mapa de atuação</h2>
+                    <p class="secao__intro">
+                        As áreas em que trabalho e as técnicas dentro de cada
+                        uma. Clique em uma área para abrir o ramo.
+                    </p>
+                </header>
+
+                <div class="mapa">
+                    <div class="mapa__controles">
+                        <button
+                            type="button"
+                            class="botao botao--miudo"
+                            data-arvore-todos="abrir"
+                        >
+                            Expandir tudo
+                        </button>
+                        <button
+                            type="button"
+                            class="botao botao--miudo"
+                            data-arvore-todos="fechar"
+                        >
+                            Recolher tudo
+                        </button>
+                    </div>
+
+                    <ul class="arvore" data-arvore>
+                        <li class="no">
+                            <button
+                                type="button"
+                                class="no__rotulo"
+                                data-no
+                                aria-expanded="false"
+                                aria-controls="ramo-genetica"
+                            >
+                                <span
+                                    class="no__seta"
+                                    aria-hidden="true"
+                                ></span>
+                                Genética e Cardiologia Molecular
+                            </button>
+                            <div class="no__ramo" id="ramo-genetica">
+                                <ul class="no__lista">
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Extração de DNA</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Genotipagem por PCR</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Eletroforese em gel de
+                                            agarose</span
+                                        >
+                                    </li>
+                                    <li class="no">
+                                        <button
+                                            type="button"
+                                            class="no__rotulo"
+                                            data-no
+                                            aria-expanded="false"
+                                            aria-controls="ramo-animais"
+                                        >
+                                            <span
+                                                class="no__seta"
+                                                aria-hidden="true"
+                                            ></span>
+                                            Modelos animais
+                                        </button>
+                                        <div class="no__ramo" id="ramo-animais">
+                                            <ul class="no__lista">
+                                                <li class="no no--folha">
+                                                    <span
+                                                        class="no__rotulo no__rotulo--folha"
+                                                        >Manejo de
+                                                        camundongos</span
+                                                    >
+                                                </li>
+                                                <li class="no no--folha">
+                                                    <span
+                                                        class="no__rotulo no__rotulo--folha"
+                                                        >Ética e bem-estar
+                                                        animal</span
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="no">
+                            <button
+                                type="button"
+                                class="no__rotulo"
+                                data-no
+                                aria-expanded="false"
+                                aria-controls="ramo-dor"
+                            >
+                                <span
+                                    class="no__seta"
+                                    aria-hidden="true"
+                                ></span>
+                                Neurociência da Dor
+                            </button>
+                            <div class="no__ramo" id="ramo-dor">
+                                <ul class="no__lista">
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Neuroanatomia funcional</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Fisiologia da dor</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Exercício físico como terapia</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="no">
+                            <button
+                                type="button"
+                                class="no__rotulo"
+                                data-no
+                                aria-expanded="false"
+                                aria-controls="ramo-clinica"
+                            >
+                                <span
+                                    class="no__seta"
+                                    aria-hidden="true"
+                                ></span>
+                                Pesquisa Clínica
+                            </button>
+                            <div class="no__ramo" id="ramo-clinica">
+                                <ul class="no__lista">
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Boas Práticas Clínicas</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Documentos regulatórios</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >TCLE e acompanhamento de
+                                            participantes</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Auditoria e revisão
+                                            documental</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Organização de dados de
+                                            pesquisa</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="no">
+                            <button
+                                type="button"
+                                class="no__rotulo"
+                                data-no
+                                aria-expanded="false"
+                                aria-controls="ramo-evidencia"
+                            >
+                                <span
+                                    class="no__seta"
+                                    aria-hidden="true"
+                                ></span>
+                                Evidência e Avaliação de Impacto
+                            </button>
+                            <div class="no__ramo" id="ramo-evidencia">
+                                <ul class="no__lista">
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Síntese de evidências</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Teoria da Mudança</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Indicadores (KPIs)</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Saúde pública e saúde da
+                                            criança</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="no">
+                            <button
+                                type="button"
+                                class="no__rotulo"
+                                data-no
+                                aria-expanded="false"
+                                aria-controls="ramo-divulgacao"
+                            >
+                                <span
+                                    class="no__seta"
+                                    aria-hidden="true"
+                                ></span>
+                                Divulgação e Educação Científica
+                            </button>
+                            <div class="no__ramo" id="ramo-divulgacao">
+                                <ul class="no__lista">
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Materiais educativos</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Letramento científico</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Acessibilidade no ensino</span
+                                        >
+                                    </li>
+                                    <li class="no no--folha">
+                                        <span
+                                            class="no__rotulo no__rotulo--folha"
+                                            >Fisiologia humana integrada</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <span
+                    class="ilustra-borda ilustra-borda--celula"
+                    aria-hidden="true"
+                    ><svg><use href="#ilu-celula" /></svg
+                ></span>
+            </section>
+
+            <!-- ========================= 07 · CONTATO ========================= -->
+            <section class="secao secao--contato" id="contato">
+                <span class="textura-aquarela" aria-hidden="true"></span>
+                <span class="textura-papel" aria-hidden="true"></span>
+
+                <header class="secao__cabecalho secao__cabecalho--claro">
+                    <h2 class="titulo-secao">Vamos conversar</h2>
+                    <p class="secao__intro">
+                        Para oportunidades em pesquisa clínica, colaborações
+                        acadêmicas ou projetos de divulgação científica.
+                    </p>
+                </header>
+
+                <div class="contato">
+                    <!-- SUBSTITUIR (opcional): endpoint de formulário, ex. Formspree ou Basin.
+         Sem backend, o envio abre o cliente de e-mail com a mensagem pronta. -->
+                    <form
+                        class="form"
+                        action="mailto:barbara.sganga04@gmail.com"
+                        method="post"
+                        enctype="text/plain"
+                    >
+                        <div class="campo">
+                            <label for="campo-nome">Nome</label>
+                            <input
+                                type="text"
+                                id="campo-nome"
+                                name="nome"
+                                required
+                                autocomplete="name"
+                                placeholder="Como devo te chamar"
+                            />
+                            <p class="campo__erro">
+                                Preencha seu nome para eu saber com quem falo.
+                            </p>
+                        </div>
+
+                        <div class="campo">
+                            <label for="campo-email">E-mail</label>
+                            <input
+                                type="email"
+                                id="campo-email"
+                                name="email"
+                                required
+                                autocomplete="email"
+                                placeholder="voce@instituicao.br"
+                            />
+                            <p class="campo__erro">
+                                Confira o e-mail: ele precisa ter o formato
+                                nome@dominio.
+                            </p>
+                        </div>
+
+                        <div class="campo">
+                            <label for="campo-mensagem">Mensagem</label>
+                            <textarea
+                                id="campo-mensagem"
+                                name="mensagem"
+                                rows="5"
+                                required
+                                placeholder="Conte em duas linhas o que você tem em mente."
+                            ></textarea>
+                            <p class="campo__erro">
+                                Escreva uma mensagem, mesmo que curta.
+                            </p>
+                        </div>
+
+                        <button type="submit" class="botao botao--principal">
+                            Enviar mensagem
+                        </button>
+                        <p class="form__ajuda">
+                            O envio abre seu programa de e-mail com a mensagem
+                            pronta. Se preferir, escreva direto para o endereço
+                            ao lado.
+                        </p>
+                    </form>
+
+                    <aside class="contato__lateral">
+                        <ul class="contato__links">
+                            <li>
+                                <a href="mailto:barbara.sganga04@gmail.com"
+                                    >barbara.sganga04@gmail.com</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.linkedin.com/in/barbara-sganga-7454a9285/"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >LinkedIn</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="assets/docs/curriculo-barbara-sganga-en.pdf"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Currículo (PDF, inglês)</a
+                                >
+                            </li>
+                            <!-- SUBSTITUIR (opcional): link do Currículo Lattes, quando houver
+        <li><a href="#" target="_blank" rel="noopener">Currículo Lattes</a></li> -->
+                        </ul>
+                        <p class="contato__nota">São Paulo, SP</p>
+                    </aside>
+                </div>
+            </section>
+        </main>
+
+        <footer class="rodape">
+            <span class="textura-aquarela" aria-hidden="true"></span>
+            <span class="textura-papel" aria-hidden="true"></span>
+            <div class="rodape__conteudo">
+                <p class="rodape__nome">Barbara Sganga</p>
+                <nav class="rodape__links" aria-label="Links de contato">
+                    <a href="mailto:barbara.sganga04@gmail.com">e-mail</a>
+                    <a
+                        href="https://www.linkedin.com/in/barbara-sganga-7454a9285/"
+                        target="_blank"
+                        rel="noopener"
+                        >LinkedIn</a
+                    >
+                    <a
+                        href="assets/docs/curriculo-barbara-sganga-en.pdf"
+                        target="_blank"
+                        rel="noopener"
+                        >Currículo</a
+                    >
+                </nav>
+                <p class="rodape__copy">
+                    &copy; 2026 · Cada descoberta começa com uma pergunta. Cada
+                    avanço nasce da coragem de investigá-la.
+                </p>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>

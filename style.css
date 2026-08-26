@@ -1,0 +1,1666 @@
+/* ==========================================================================
+   PORTFÓLIO CIENTÍFICO — BIOMEDICINA
+   Direção: colagem científica de caderno de campo, com disciplina de sistema.
+
+   COMO ESTE ARQUIVO É ORGANIZADO
+   00. TOKENS ......... cores, brilho, tipografia, espaço, rotação  ← MEXA AQUI
+   01. RESET
+   02. TIPOGRAFIA BASE
+   03. UTILITÁRIOS DECORATIVOS (textura, fita, polaroid, selo, recortes)
+   04. COMPONENTES (botão, card, chips, etiquetas, rótulos de seção)
+   05. SEÇÕES 01 a 06
+   06. RODAPÉ
+   07. RESPONSIVO
+   08. ACESSIBILIDADE / MOVIMENTO REDUZIDO
+   ========================================================================== */
+
+
+/* ==========================================================================
+   00. TOKENS
+   --------------------------------------------------------------------------
+   As cores NÃO são hex fixos: cada uma é montada a partir de matiz (H),
+   saturação (S) e luminosidade (L) separadas. Isso permite:
+
+   · Clarear/escurecer o site INTEIRO   → mexa em --brilho-geral
+   · Clarear/escurecer UMA cor só       → mexa no --brilho-<cor> dela
+   · Trocar a paleta                    → mexa em H/S/L da cor
+
+   Valores positivos clareiam, negativos escurecem. Ex.: --brilho-geral: 4%
+   deixa o site inteiro um passo mais claro sem quebrar a relação entre as
+   cores. Recomendado ficar entre -8% e 8% para não perder contraste AA.
+   ========================================================================== */
+
+:root {
+  /* ---- 0.1 Controle global de brilho ---------------------------------- */
+  --brilho-geral: 0%;
+
+  /* ---- 0.2 Ajuste fino por cor (somado ao brilho geral) --------------- */
+  --brilho-papel: 0%;
+  --brilho-tinta: 0%;
+  --brilho-verde-profundo: 0%;
+  --brilho-verde-salvia: 0%;
+  --brilho-vinho: 0%;
+  --brilho-ocre: 0%;
+
+  /* ---- 0.3 Paleta (6 cores, sem azul) --------------------------------- */
+  /* --papel            #F3ECDD  fundo base, papel envelhecido            */
+  --h-papel: 41;  --s-papel: 48%;  --l-papel: 91%;
+  /* --tinta            #2B2A22  texto principal                          */
+  --h-tinta: 53;  --s-tinta: 12%;  --l-tinta: 15%;
+  /* --verde-profundo   #33402A  blocos de destaque, headers, rodapé      */
+  --h-verde-profundo: 95;  --s-verde-profundo: 21%;  --l-verde-profundo: 21%;
+  /* --verde-salvia     #6E7F58  ícones, conectores, accent secundário    */
+  --h-verde-salvia: 86;  --s-verde-salvia: 18%;  --l-verde-salvia: 42%;
+  /* --vinho-argila     #8C4A3A  accent pontual: tags, selos, hover       */
+  --h-vinho: 12;  --s-vinho: 41%;  --l-vinho: 39%;
+  /* --ocre-envelhecido #B8934D  divisórias, carimbo, bordas de destaque  */
+  --h-ocre: 39;  --s-ocre: 43%;  --l-ocre: 51%;
+
+  /* ---- 0.4 Cores montadas --------------------------------------------- */
+  /* Cada cor existe em duas formas:
+     --<cor>-hsl  → componentes soltos, para usar com transparência:
+                    hsl(var(--verde-salvia-hsl) / .35)
+     --<cor>      → a cor pronta                                          */
+  --papel-hsl: var(--h-papel) var(--s-papel)
+               calc(var(--l-papel) + var(--brilho-geral) + var(--brilho-papel));
+  --tinta-hsl: var(--h-tinta) var(--s-tinta)
+               calc(var(--l-tinta) + var(--brilho-geral) + var(--brilho-tinta));
+  --verde-profundo-hsl: var(--h-verde-profundo) var(--s-verde-profundo)
+               calc(var(--l-verde-profundo) + var(--brilho-geral) + var(--brilho-verde-profundo));
+  --verde-salvia-hsl: var(--h-verde-salvia) var(--s-verde-salvia)
+               calc(var(--l-verde-salvia) + var(--brilho-geral) + var(--brilho-verde-salvia));
+  --vinho-hsl: var(--h-vinho) var(--s-vinho)
+               calc(var(--l-vinho) + var(--brilho-geral) + var(--brilho-vinho));
+  --ocre-hsl: var(--h-ocre) var(--s-ocre)
+               calc(var(--l-ocre) + var(--brilho-geral) + var(--brilho-ocre));
+
+  --papel: hsl(var(--papel-hsl));
+  --tinta: hsl(var(--tinta-hsl));
+  --verde-profundo: hsl(var(--verde-profundo-hsl));
+  --verde-salvia: hsl(var(--verde-salvia-hsl));
+  --vinho-argila: hsl(var(--vinho-hsl));
+  --ocre-envelhecido: hsl(var(--ocre-hsl));
+
+  /* Derivadas de conveniência (papel um pouco mais escuro / mais claro) */
+  --papel-sombra: hsl(var(--h-papel) var(--s-papel)
+                  calc(var(--l-papel) + var(--brilho-geral) + var(--brilho-papel) - 6%));
+  --papel-alto: hsl(var(--h-papel) calc(var(--s-papel) - 18%)
+                calc(var(--l-papel) + var(--brilho-geral) + var(--brilho-papel) + 6%));
+  --tinta-suave: hsl(var(--h-tinta) var(--s-tinta)
+                 calc(var(--l-tinta) + var(--brilho-geral) + var(--brilho-tinta) + 22%));
+  /* Variantes de TEXTO das cores de accent.
+     Sálvia e ocre nos valores originais são ótimos como traço e borda, mas
+     não alcançam 4.5:1 em texto pequeno. Estas versões saem dos mesmos H/S,
+     só deslocadas em luminosidade — trocar a paleta continua propagando. */
+  --verde-salvia-texto: hsl(var(--h-verde-salvia) var(--s-verde-salvia)
+                        calc(var(--l-verde-salvia) + var(--brilho-geral) + var(--brilho-verde-salvia) - 12%));
+  --ocre-texto: hsl(var(--h-ocre) var(--s-ocre)
+                calc(var(--l-ocre) + var(--brilho-geral) + var(--brilho-ocre) - 16%));
+  /* Ocre clareado, para texto ocre sobre fundo --verde-profundo */
+  --ocre-claro: hsl(var(--h-ocre) var(--s-ocre)
+                calc(var(--l-ocre) + var(--brilho-geral) + var(--brilho-ocre) + 14%));
+
+  /* Texto claro usado sobre --verde-profundo (contraste ≈ 9.2:1, passa AA) */
+  --sobre-escuro: hsl(var(--h-papel) var(--s-papel)
+                  calc(var(--l-papel) + var(--brilho-geral)));
+  --sobre-escuro-suave: hsl(var(--h-papel) calc(var(--s-papel) - 20%)
+                        calc(var(--l-papel) + var(--brilho-geral) - 16%));
+
+  /* ---- 0.5 Intensidade das texturas ----------------------------------- */
+  /* Nunca passar de .08: acima disso o grão come a legibilidade. */
+  --opacidade-textura: .06;
+  --opacidade-carimbo: .7;
+  --opacidade-fita: .85;
+
+  /* ---- 0.6 Tipografia -------------------------------------------------- */
+  --fonte-display: "Fraunces", "Georgia", "Times New Roman", serif;
+  --fonte-manuscrita: "Caveat", "Segoe Script", cursive;
+  --fonte-corpo: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fonte-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", "Consolas", monospace;
+
+  --texto-xs: .75rem;
+  --texto-sm: .875rem;
+  --texto-base: 1.0625rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem);
+  --texto-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.2rem);
+  --texto-hero: clamp(2.6rem, 1.2rem + 6.4vw, 6.4rem);
+
+  /* ---- 0.7 Espaço e medidas ------------------------------------------- */
+  --largura-max: 1180px;
+  --largura-texto: 62ch;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --espaco-secao: clamp(4rem, 7vw, 7rem);
+  --raio: 3px;
+
+  /* ---- 0.8 Rotações decorativas ---------------------------------------
+     Regra do sistema: nada além de -4deg a 6deg. O carimbo é a única
+     exceção (-8deg), porque carimbo torto lê como carimbo, não como erro. */
+  --rot-1: -2.2deg;
+  --rot-2: 1.6deg;
+  --rot-3: -1.2deg;
+  --rot-4: 2.8deg;
+  --rot-carimbo: -8deg;
+
+  /* ---- 0.9 Recortes de papel rasgado -----------------------------------
+     Polígonos gerados uma vez e reaproveitados (nunca recalculados em JS).
+     Os deslocamentos verticais são em PIXELS, não em porcentagem: em % o
+     dente cresce junto com a altura da seção e a borda vira serra. */
+  --recorte-bloco: polygon(
+    0% 7px, 5% 1px, 11% 6px, 17% 0px, 24% 5px, 31% 1px, 38% 6px, 45% 0px,
+    52% 5px, 59% 2px, 66% 6px, 73% 0px, 80% 5px, 87% 1px, 94% 6px, 100% 2px,
+    100% calc(100% - 6px), 94% calc(100% - 1px), 87% 100%,
+    80% calc(100% - 5px), 73% calc(100% - 1px), 66% 100%,
+    59% calc(100% - 4px), 52% calc(100% - 1px), 45% 100%,
+    38% calc(100% - 5px), 31% calc(100% - 1px), 24% 100%,
+    17% calc(100% - 5px), 11% calc(100% - 1px), 5% 100%, 0% calc(100% - 4px)
+  );
+  --recorte-tarja: polygon(
+    3px 7px, 12% 1px, 26% 6px, 40% 0px, 55% 5px, 70% 1px, 85% 6px,
+    calc(100% - 2px) 2px,
+    100% 22%, calc(100% - 4px) 48%, 100% 74%, calc(100% - 2px) calc(100% - 5px),
+    86% 100%, 72% calc(100% - 4px), 58% 100%, 44% calc(100% - 5px),
+    30% 100%, 16% calc(100% - 3px), 4px 100%,
+    1px 72%, 5px 46%, 0px 24%
+  );
+  /* Rasgado só no topo; base e laterais retas. Para uma seção que precisa
+     se fundir sem emenda com o que vem logo abaixo (ex.: Contato → Rodapé). */
+  --recorte-topo: polygon(
+    0% 7px, 12% 1px, 26% 6px, 40% 0px, 55% 5px, 70% 1px, 85% 6px, 100% 2px,
+    100% 100%, 0% 100%
+  );
+
+  /* ---- 0.10 Sombras e tempos ------------------------------------------ */
+  --sombra-papel: 0 4px 12px hsl(var(--tinta-hsl) / .15);
+  --sombra-card: 0 2px 4px hsl(var(--tinta-hsl) / .08),
+                 0 10px 24px hsl(var(--tinta-hsl) / .10);
+  --transicao: 220ms cubic-bezier(.2, .7, .3, 1);
+}
+
+
+/* ==========================================================================
+   01. RESET
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+ul, ol { list-style: none; padding: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; }
+input, textarea { font: inherit; color: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2.5px solid var(--vinho-argila);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.pular-link {
+  position: absolute; top: .5rem; left: .5rem;
+  z-index: 100;
+  padding: .6rem 1rem;
+  background: var(--verde-profundo);
+  color: var(--sobre-escuro);
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  transform: translateY(-160%);
+  transition: transform var(--transicao);
+}
+.pular-link:focus-visible { transform: translateY(0); }
+
+
+/* ==========================================================================
+   02. TIPOGRAFIA BASE
+   --------------------------------------------------------------------------
+   Quatro papéis, nunca mais de duas famílias dominantes por seção.
+   Fraunces = títulos · Inter = corpo · IBM Plex Mono = dados/rótulos ·
+   Caveat = anotações manuscritas (uso pontual, sempre curto).
+   ========================================================================== */
+
+h1, h2, h3 {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+
+.titulo-secao {
+  font-size: var(--texto-2xl);
+  font-weight: 900;
+}
+
+.secao__intro {
+  max-width: var(--largura-texto);
+  color: var(--tinta-suave);
+  text-wrap: pretty;
+}
+
+.secao__cabecalho--claro .secao__intro { color: var(--sobre-escuro-suave); }
+.secao__cabecalho--claro .titulo-secao { color: var(--sobre-escuro); }
+
+
+/* ==========================================================================
+   03. UTILITÁRIOS DECORATIVOS
+   ========================================================================== */
+
+/* --- 3.1 Textura de grão/papel ----------------------------------------
+   SVG feTurbulence embutido como data-URI: sem requisição, sem custo de
+   runtime. Sempre como camada absoluta, nunca como background do texto. */
+.textura-papel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Fica atrás do conteúdo sem obrigar os filhos da seção a um position
+     próprio — o que quebraria as decorações posicionadas em absoluto. */
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--opacidade-textura);
+  mix-blend-mode: multiply;
+}
+
+/* --- 3.1b Aquarela ------------------------------------------------------
+   Manchas radiais em screen blend, para dar respiro de cor a fundos
+   --verde-profundo sem quebrar contraste. Reutilizável: qualquer seção
+   escura com `position:relative` pode receber um
+   `<span class="textura-aquarela" aria-hidden="true">` como primeiro
+   filho — sangra além da borda (inset negativo) e usa overflow-x:clip da
+   seção para não gerar barra de rolagem. */
+.textura-aquarela {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: .3;
+  background:
+    radial-gradient(46% 60% at 18% 30%, hsl(var(--papel-hsl) / .55) 0%, transparent 68%),
+    radial-gradient(40% 52% at 76% 22%, hsl(var(--verde-salvia-hsl) / .7) 0%, transparent 70%),
+    radial-gradient(52% 66% at 58% 88%, hsl(var(--ocre-hsl) / .5) 0%, transparent 72%);
+  filter: blur(10px);
+}
+/* Na seção Contato as manchas pendem para a base, para que o padrão
+   pareça continuar no rodapé logo abaixo em vez de "recomeçar do zero".
+   Sangria vertical bem mais curta que o padrão (-3% em vez de -20%): a
+   seção não tem overflow-y:clip próprio — o vazamento vertical do fundo
+   ::before é proposital (-16px, funde com o Mapa acima), então conter
+   isso na seção inteira cortaria aquele efeito também. Só a sangria
+   lateral, que já é cortada pelo overflow-x:clip da seção, continua larga. */
+.secao--contato .textura-aquarela {
+  inset: -3% -20%;
+  background:
+    radial-gradient(50% 60% at 24% 78%, hsl(var(--papel-hsl) / .5) 0%, transparent 70%),
+    radial-gradient(42% 54% at 80% 70%, hsl(var(--verde-salvia-hsl) / .65) 0%, transparent 72%),
+    radial-gradient(46% 60% at 55% 100%, hsl(var(--ocre-hsl) / .45) 0%, transparent 74%);
+}
+
+/* --- 3.2 Fita washi ---------------------------------------------------- */
+.fita { position: relative; }
+.fita::before {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 24px;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--ocre-envelhecido) 0 6px,
+    transparent 6px 12px
+  );
+  background-color: hsl(var(--ocre-hsl) / .18);
+  opacity: var(--opacidade-fita);
+  pointer-events: none;
+  z-index: 3;
+}
+/* Variação: fita no canto, não no centro */
+.fita--canto::before {
+  left: auto;
+  right: -18px;
+  top: 18px;
+  transform: rotate(38deg);
+}
+
+/* --- 3.3 Moldura polaroid ---------------------------------------------- */
+.polaroid {
+  position: relative;
+  padding: 12px 12px 40px;
+  background: var(--papel-alto);
+  box-shadow: var(--sombra-papel);
+  transform: rotate(var(--rot, 0deg));
+}
+.polaroid img { background: var(--papel-sombra); }
+.polaroid__legenda {
+  position: absolute;
+  left: 0; right: 0; bottom: 8px;
+  text-align: center;
+  font-family: var(--fonte-manuscrita);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--tinta-suave);
+}
+
+/* --- 3.4 Selo / carimbo ------------------------------------------------ */
+.selo-carimbo {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border: 2px solid var(--vinho-argila);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--papel), 0 0 0 5px var(--vinho-argila);
+  color: var(--vinho-argila);
+  font-family: var(--fonte-mono);
+  font-size: .58rem;
+  line-height: 1.25;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: var(--opacidade-carimbo);
+  mix-blend-mode: multiply;
+  transform: rotate(var(--rot-carimbo));
+  pointer-events: none;
+}
+
+.selo-brasao {
+  width: clamp(120px, 16vw, 176px);
+  margin-inline: auto;
+  /* Sobre o fundo escuro o carimbo usa o ocre clareado e mistura em screen,
+     senão o traço some. */
+  color: var(--ocre-claro);
+  opacity: .8;
+  mix-blend-mode: screen;
+  transform: rotate(var(--rot-carimbo));
+}
+.selo-brasao__anel { fill: none; stroke: currentColor; stroke-width: 2.5; }
+.selo-brasao__texto {
+  fill: currentColor;
+  font-family: var(--fonte-mono);
+  font-size: 15px;
+  letter-spacing: .22em;
+}
+.selo-brasao__miolo {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* --- 3.5 Rotações de sistema ------------------------------------------- */
+.rot-1 { --rot: var(--rot-1); transform: rotate(var(--rot-1)); }
+.rot-2 { --rot: var(--rot-2); transform: rotate(var(--rot-2)); }
+.rot-3 { --rot: var(--rot-3); transform: rotate(var(--rot-3)); }
+.rot-4 { --rot: var(--rot-4); transform: rotate(var(--rot-4)); }
+
+/* --- 3.6 Ilustrações --------------------------------------------------- */
+.sprite-ilustracoes { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.ilustra,
+.ilustra-solta,
+.ilustra-borda,
+.transbordo { display: block; pointer-events: none; }
+
+.ilustra svg,
+.ilustra-solta svg,
+.ilustra-borda svg,
+.transbordo svg { width: 100%; height: 100%; }
+
+.ilustra-borda {
+  position: absolute;
+  color: var(--verde-salvia);
+  opacity: .38;
+  z-index: 0;
+}
+.ilustra-solta {
+  position: absolute;
+  width: 46px; height: 46px;
+  right: 14px; bottom: 14px;
+  color: var(--verde-salvia);
+  opacity: .5;
+}
+.transbordo {
+  position: absolute;
+  z-index: 2;
+  color: var(--verde-salvia);
+  opacity: .45;
+}
+
+
+/* ==========================================================================
+   04. COMPONENTES
+   ========================================================================== */
+
+/* --- 4.1 Rótulo de seção (chapa de moldura, sempre em mono) ------------- */
+.rotulo-secao {
+  position: relative;
+  z-index: 2;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+}
+.rotulo-secao span {
+  display: inline-block;
+  margin-right: .75rem;
+  padding: .15rem .5rem;
+  border: 1px solid hsl(var(--ocre-hsl) / .6);
+  color: var(--ocre-texto);
+}
+.rotulo-secao--claro { color: var(--sobre-escuro-suave); }
+
+/* --- 4.2 Botões --------------------------------------------------------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .62rem 1.15rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--raio);
+  background: transparent;
+  color: var(--tinta);
+  font-size: var(--texto-sm);
+  font-weight: 500;
+  letter-spacing: .01em;
+  text-decoration: none;
+  transition: background var(--transicao), color var(--transicao),
+              border-color var(--transicao), transform var(--transicao);
+}
+.botao:hover {
+  background: var(--vinho-argila);
+  border-color: var(--vinho-argila);
+  color: var(--papel);
+  transform: translateY(-1px);
+}
+.botao--principal {
+  background: var(--verde-profundo);
+  border-color: var(--verde-profundo);
+  color: var(--sobre-escuro);
+}
+.botao--fantasma { border-style: dashed; border-color: var(--verde-salvia); }
+.botao--miudo {
+  padding: .35rem .7rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-width: 1px;
+  border-color: hsl(var(--verde-salvia-hsl) / .6);
+  color: var(--verde-salvia-texto);
+}
+
+/* --- 4.3 Cards ---------------------------------------------------------- */
+.card {
+  position: relative;
+  z-index: 1;
+  padding: 2.1rem 1.6rem 1.6rem;
+  background: var(--papel-alto);
+  /* O card tem fundo claro mesmo dentro de uma seção escura: fixa a cor de
+     texto para não herdar o claro-sobre-claro. */
+  color: var(--tinta);
+  border: 1px solid hsl(var(--ocre-hsl) / .35);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-card);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+.card:hover {
+  transform: rotate(var(--rot, 0deg)) translateY(-3px);
+  box-shadow: 0 4px 8px hsl(var(--tinta-hsl) / .10),
+              0 16px 32px hsl(var(--tinta-hsl) / .14);
+}
+.card__indice {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ocre-texto);
+}
+.card__titulo {
+  margin: .35rem 0 .7rem;
+  font-size: var(--texto-xl);
+}
+.card__texto { color: var(--tinta-suave); text-wrap: pretty; }
+.card__resultado {
+  margin-top: 1rem;
+  padding-top: .9rem;
+  border-top: 1px dashed hsl(var(--ocre-hsl) / .55);
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+/* Abre espaço para a ilustração solta do canto, para o traço nunca cair
+   por cima da última linha de texto. */
+.card:has(.ilustra-solta) .card__resultado { padding-right: 3.6rem; }
+.card:has(.selo-carimbo) .card__resultado { padding-right: 4.2rem; }
+.card__resultado span {
+  display: block;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+}
+
+/* --- 4.4 Chips de técnica (sempre mono) --------------------------------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: 1rem;
+}
+.chips li {
+  padding: .18rem .55rem;
+  border: 1px solid hsl(var(--verde-salvia-hsl) / .55);
+  border-radius: 999px;
+  background: hsl(var(--verde-salvia-hsl) / .1);
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  color: var(--verde-salvia-texto);
+}
+
+.tag-parceiro {
+  display: inline-block;
+  margin-bottom: .9rem;
+  padding: .15rem .5rem;
+  background: hsl(var(--vinho-hsl) / .12);
+  border-left: 3px solid var(--vinho-argila);
+  color: var(--vinho-argila);
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .04em;
+}
+
+
+/* ==========================================================================
+   05. SEÇÕES
+   ========================================================================== */
+
+.secao {
+  position: relative;
+  padding: var(--espaco-secao) var(--gutter);
+  isolation: isolate;
+  /* Clipa só no eixo X: decorações que sangram na lateral não geram barra
+     de rolagem, mas o transborde vertical para a seção seguinte é preservado. */
+  overflow-x: clip;
+}
+.secao__cabecalho { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.secao__cabecalho .titulo-secao { margin-bottom: .8rem; }
+
+/* Seções escuras: bloco --verde-profundo com borda de papel rasgado.
+   O recorte fica no ::before (fundo), não na seção, para que os elementos
+   que transbordam para a seção seguinte não sejam cortados. */
+.secao--escura { color: var(--sobre-escuro); }
+.secao--escura::before {
+  content: "";
+  position: absolute;
+  inset: -14px 0;
+  z-index: -1;
+  background: var(--verde-profundo);
+  clip-path: var(--recorte-bloco);
+}
+
+/* --- 5.0 Navegação ------------------------------------------------------ */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .7rem var(--gutter);
+  background: hsl(var(--papel-hsl) / .9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid hsl(var(--ocre-hsl) / .4);
+}
+.topo__marca {
+  font-family: var(--fonte-display);
+  font-weight: 600;
+  font-size: var(--texto-lg);
+  text-decoration: none;
+  letter-spacing: -.01em;
+}
+.topo__marca span { font-style: italic; font-weight: 900; }
+
+.topo__nav {
+  display: flex;
+  gap: clamp(.6rem, 2vw, 1.6rem);
+}
+.topo__nav a {
+  position: relative;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--tinta-suave);
+  padding-bottom: 2px;
+  transition: color var(--transicao);
+}
+.topo__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: 0;
+  height: 1.5px;
+  background: var(--vinho-argila);
+  transition: right var(--transicao);
+}
+.topo__nav a:hover { color: var(--vinho-argila); }
+.topo__nav a:hover::after { right: 0; }
+
+/* Botão sanduíche: escondido no desktop, vira o controle do menu no mobile.
+   O ícone são três traços feitos com o próprio elemento + dois pseudos. */
+.menu-botao {
+  display: none;
+  align-items: center;
+  gap: .55rem;
+  padding: .5rem .7rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  border: 1.5px solid hsl(var(--ocre-hsl) / .6);
+  border-radius: var(--raio);
+}
+.menu-botao__icone,
+.menu-botao__icone::before,
+.menu-botao__icone::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform var(--transicao), opacity var(--transicao);
+}
+.menu-botao__icone { position: relative; }
+.menu-botao__icone::before { position: absolute; top: -6px; }
+.menu-botao__icone::after  { position: absolute; top:  6px; }
+/* Aberto: os três traços viram um X */
+.menu-botao[aria-expanded="true"] .menu-botao__icone { background: transparent; }
+.menu-botao[aria-expanded="true"] .menu-botao__icone::before { transform: translateY(6px) rotate(45deg); }
+.menu-botao[aria-expanded="true"] .menu-botao__icone::after  { transform: translateY(-6px) rotate(-45deg); }
+
+/* --- 5.1 HERO ----------------------------------------------------------- */
+.secao--hero {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(5rem, 10vw, 8rem);
+  /* clip no eixo X evita barra de rolagem lateral sem cortar o elemento
+     que transborda para a seção seguinte (overflow-y segue visível). */
+  overflow-x: clip;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+
+.hero__kicker {
+  margin-bottom: 1rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+}
+
+.hero__titulo { margin-bottom: 1.4rem; }
+
+/* Recorte de destaque: o --verde-profundo aparece só aqui, atrás do nome.
+   O nome é a assinatura do site, então ocupa o máximo de espaço possível.
+   Contraste do texto claro sobre o bloco ≈ 9.2:1 (WCAG AA e AAA). */
+.hero__recorte {
+  position: relative;
+  display: inline-block;
+  padding: .34em .6em .4em;
+  color: var(--sobre-escuro);
+  font-size: var(--texto-hero);
+}
+.hero__recorte::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--verde-profundo);
+  clip-path: var(--recorte-tarja);
+  transform: rotate(-1.1deg);
+}
+.hero__nome {
+  display: block;
+  font-weight: 500;
+  font-size: .52em;
+  line-height: 1;
+  letter-spacing: .01em;
+  color: var(--sobre-escuro-suave);
+}
+.hero__sobrenome {
+  display: block;
+  font-style: italic;
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.02em;
+}
+
+.hero__bio {
+  max-width: 52ch;
+  margin-top: .2rem;
+  font-size: var(--texto-lg);
+  color: var(--tinta-suave);
+  text-wrap: pretty;
+}
+/* Linha de intenção: a direção do site, ancorada por uma barra sálvia */
+.hero__intencao {
+  max-width: 52ch;
+  margin-top: 1rem;
+  padding-left: .9rem;
+  border-left: 3px solid var(--verde-salvia);
+  color: var(--tinta);
+}
+.hero__intencao strong { color: var(--vinho-argila); font-weight: 600; }
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.8rem;
+}
+.botao__nota {
+  font-family: var(--fonte-mono);
+  font-size: .68em;
+  letter-spacing: .04em;
+  opacity: .7;
+}
+
+/* Números-âncora, em mono, no estilo de anotação de dados */
+.numeros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 2rem;
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px dashed hsl(var(--ocre-hsl) / .5);
+}
+.numeros li {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  line-height: 1.3;
+  color: var(--tinta-suave);
+  max-width: 12ch;
+}
+.numeros strong {
+  display: block;
+  font-family: var(--fonte-display);
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--verde-profundo);
+}
+
+.hero__coluna {
+  display: grid;
+  justify-items: center;
+  gap: 1.2rem;
+}
+.hero__foto { width: 100%; max-width: 340px; }
+
+/* Bilhete manuscrito preso sob a foto */
+.nota-papel {
+  max-width: 300px;
+  padding: 1.1rem 1.2rem;
+  background: var(--papel-alto);
+  box-shadow: var(--sombra-papel);
+}
+.nota-papel__texto {
+  font-family: var(--fonte-manuscrita);
+  font-size: 1.4rem;
+  line-height: 1.25;
+  color: var(--tinta);
+}
+.nota-papel__autor {
+  margin-top: .5rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+/* Ilustrações de moldura do Hero.
+   BUG corrigido: o container cobre a seção inteira (inset:0) e, por ser
+   posicionado, pinta por cima do `.hero` estático na ordem de empilhamento —
+   mesmo com os ícones filhos em pointer-events:none, o container em si
+   interceptava todo clique na seção (LinkedIn, Currículo, Contato). */
+.hero__ilustracoes { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.ilustra {
+  position: absolute;
+  color: var(--verde-salvia);
+  opacity: 0;
+  transform: translateY(14px);
+}
+.ilustra svg { width: 100%; height: 100%; }
+.ilustra.is-visivel {
+  opacity: .5;
+  transform: translateY(0);
+  transition: opacity 420ms ease-out, transform 420ms ease-out;
+  transition-delay: calc(var(--ordem, 0) * 130ms);
+}
+/* A prancha do coração anotada é a peça-assinatura: entra mais opaca */
+.ilustra--coracao.is-visivel { opacity: .72; }
+
+/* Chamadas manuscritas da figura anotada */
+.fig__rotulo {
+  font-family: var(--fonte-manuscrita);
+  font-size: 13px;
+  fill: currentColor;
+}
+.fig__chamada { opacity: .8; }
+
+/* Posições na moldura — faixa superior, corredor entre colunas e rodapé —,
+   nunca por cima do texto de conteúdo. */
+.ilustra--coracao   { width: 190px; height: 128px; top: 1rem;      right: 1vw;  }
+.ilustra--helice    { width: 82px;  height: 82px;  bottom: 1.5rem; left: 4vw;   }
+.ilustra--ramo      { width: 100px; height: 100px; top: 46%;       left: -2.5vw; }
+.ilustra--neuronio  { width: 96px;  height: 96px;  bottom: 5rem;   right: 40%;  }
+
+.transbordo--placa {
+  width: 110px; height: 110px;
+  right: 8vw; bottom: -55px;
+  color: var(--ocre-envelhecido);
+}
+
+/* --- 5.2 PROJETOS -------------------------------------------------------- */
+.secao--projetos { overflow-x: clip; }
+
+/* Dois cards, em disposição levemente assimétrica: nunca uma grade perfeita. */
+.projetos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.6rem, 3.5vw, 3rem);
+  max-width: 960px;
+  margin-inline: auto;
+}
+.card--projeto:nth-child(1) { --rot: var(--rot-1); transform: rotate(var(--rot-1)) translateY(-8px); }
+.card--projeto:nth-child(2) { --rot: var(--rot-2); transform: rotate(var(--rot-2)) translateY(14px); }
+.card--projeto:nth-child(1):hover { transform: rotate(var(--rot-1)) translateY(-12px); }
+.card--projeto:nth-child(2):hover { transform: rotate(var(--rot-2)) translateY(10px); }
+
+/* Local/instituição, logo abaixo do título */
+.card__local {
+  margin: -.3rem 0 .7rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  line-height: 1.35;
+  color: var(--verde-salvia-texto);
+}
+
+.card--projeto .selo-carimbo { right: -26px; bottom: -22px; }
+
+.ilustra-borda--flor   { width: 96px;  height: 96px;  top: 10%;    right: 3vw; }
+.ilustra-borda--pipeta { width: 74px;  height: 74px;  bottom: 8%;  left: 2vw; transform: rotate(14deg); }
+
+/* --- 5.3 PARCERIAS & INOVAÇÃO -------------------------------------------- */
+.secao--parcerias {
+  color: var(--sobre-escuro);
+  margin-block: clamp(2rem, 5vw, 4rem);
+}
+.secao--parcerias::before {
+  content: "";
+  position: absolute;
+  inset: -16px 0;
+  z-index: -1;
+  background: var(--verde-profundo);
+  clip-path: var(--recorte-bloco);
+}
+.secao--parcerias .textura-papel { mix-blend-mode: overlay; opacity: .1; }
+.secao--parcerias .rotulo-secao span {
+  border-color: hsl(var(--ocre-hsl) / .8);
+  color: var(--ocre-claro);
+}
+
+.selo-brasao { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+/* Três cases: dois na primeira linha, o de destaque ocupando a linha inteira. */
+.cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(1.6rem, 3.5vw, 3rem);
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+.card--case:nth-of-type(1) { --rot: var(--rot-3); transform: rotate(var(--rot-3)); }
+.card--case:nth-of-type(2) { --rot: var(--rot-4); transform: rotate(var(--rot-4)) translateY(14px); }
+.card--case:nth-of-type(2):hover { transform: rotate(var(--rot-4)) translateY(11px); }
+
+/* Card de destaque: o Atlas. Ocupa as duas colunas e ganha moldura ocre. */
+.card--destaque {
+  grid-column: 1 / -1;
+  --rot: var(--rot-1);
+  transform: rotate(var(--rot-1));
+  border: 2px solid var(--ocre-envelhecido);
+  box-shadow: 0 2px 4px hsl(var(--tinta-hsl) / .1), 0 14px 30px hsl(var(--tinta-hsl) / .16);
+}
+.card--destaque:hover { transform: rotate(var(--rot-1)) translateY(-4px); }
+/* No card largo, o dossiê corre em duas colunas de definição */
+@media (min-width: 720px) {
+  .card--destaque .dossie {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.4rem;
+  }
+}
+
+.dossie { margin-top: .3rem; }
+.dossie dt {
+  margin-top: .8rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+}
+.dossie dd {
+  margin: .15rem 0 0;
+  color: var(--tinta-suave);
+  font-size: var(--texto-sm);
+  text-wrap: pretty;
+}
+
+/* Faixa de modalidades: âncora da mensagem, abaixo dos cases. */
+.modalidades {
+  max-width: var(--largura-max);
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px dashed hsl(var(--ocre-hsl) / .5);
+}
+.modalidades__titulo {
+  margin-bottom: 1.6rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ocre-claro);
+}
+.modalidades__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.8rem);
+}
+.etiqueta {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: 1.1rem 1rem .9rem;
+  background: var(--papel-alto);
+  color: var(--tinta);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-papel);
+  font-size: var(--texto-sm);
+  font-weight: 500;
+  text-wrap: balance;
+}
+.etiqueta:nth-child(1) { transform: rotate(var(--rot-3)); }
+.etiqueta:nth-child(2) { transform: rotate(var(--rot-2)); }
+.etiqueta:nth-child(3) { transform: rotate(var(--rot-1)); }
+.etiqueta:nth-child(4) { transform: rotate(var(--rot-4)); }
+.etiqueta__icone {
+  flex: none;
+  width: 30px; height: 30px;
+  color: var(--verde-salvia);
+}
+
+.transbordo--frasco {
+  width: 84px; height: 84px;
+  left: 6vw; bottom: -46px;
+  color: var(--ocre-claro);
+  transform: rotate(-12deg);
+}
+
+/* Selo largo, para o carimbo "aprovado Brasil Júnior" do card de destaque */
+.selo-carimbo--largo {
+  width: 108px;
+  height: 108px;
+  font-size: .6rem;
+}
+.card--destaque .selo-carimbo { right: -30px; top: -26px; bottom: auto; }
+
+/* --- 5.35 CIÊNCIA QUE SAI DO LABORATÓRIO -------------------------------- */
+.secao--extensao { overflow-x: clip; }
+
+.extensao {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 250px);
+  gap: clamp(1.6rem, 4vw, 3rem);
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+
+/* Atividades como fichas empilhadas presas por uma linha vertical de tinta */
+.atividades {
+  display: grid;
+  gap: 1.2rem;
+  position: relative;
+}
+.atividade {
+  position: relative;
+  padding: 1.2rem 1.3rem 1.2rem 1.4rem;
+  background: var(--papel-alto);
+  border: 1px solid hsl(var(--ocre-hsl) / .3);
+  border-left: 3px solid var(--verde-salvia);
+  border-radius: var(--raio);
+  box-shadow: 0 2px 6px hsl(var(--tinta-hsl) / .08);
+  transition: transform var(--transicao);
+}
+.atividade:hover { transform: translateX(3px); }
+.atividade__periodo {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .1em;
+  color: var(--ocre-texto);
+}
+.atividade__titulo { margin: .2rem 0 .1rem; font-size: var(--texto-lg); }
+.atividade__local {
+  margin-bottom: .5rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  color: var(--verde-salvia-texto);
+}
+.atividade__texto { font-size: var(--texto-sm); color: var(--tinta-suave); text-wrap: pretty; }
+
+.lateral-extensao { position: relative; }
+
+/* Checklist no espírito da referência (observar, perguntar, aprender...) */
+.checklist {
+  position: sticky;
+  top: 5rem;
+  padding: 1.4rem 1.4rem 1.4rem 1.5rem;
+  background: var(--papel-alto);
+  box-shadow: var(--sombra-papel);
+}
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .35rem 0;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+.checklist li::before {
+  content: "";
+  flex: none;
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--verde-salvia);
+  border-radius: 3px;
+}
+.checklist li.is-marcado { color: var(--tinta); font-weight: 500; }
+.checklist li.is-marcado::before {
+  background: var(--verde-salvia);
+  box-shadow: inset 0 0 0 2px var(--papel-alto);
+}
+
+.ilustra-lateral {
+  display: block;
+  width: 120px; height: 120px;
+  margin: 1.5rem auto 0;
+  color: var(--verde-salvia);
+  opacity: .5;
+  transform: rotate(-6deg);
+}
+.ilustra-lateral svg { width: 100%; height: 100%; }
+
+/* Formação complementar: certificados como etiquetas de arquivo */
+.formacao {
+  max-width: var(--largura-max);
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px dashed hsl(var(--ocre-hsl) / .5);
+}
+.formacao__titulo {
+  margin-bottom: 1.4rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ocre-texto);
+}
+.formacao__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+.certificado {
+  padding: .9rem 1rem;
+  background: var(--papel-alto);
+  border: 1px solid hsl(var(--ocre-hsl) / .35);
+  border-radius: var(--raio);
+  box-shadow: 0 2px 5px hsl(var(--tinta-hsl) / .07);
+  border-top: 3px double var(--ocre-envelhecido);
+}
+.certificado__nome { font-size: var(--texto-sm); font-weight: 600; line-height: 1.35; }
+.certificado__nome span {
+  display: block;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+.certificado__meta {
+  margin-top: .35rem;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  color: var(--verde-salvia-texto);
+}
+.idiomas {
+  margin-top: 1.8rem;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+.idiomas__rotulo {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+  margin-right: .6rem;
+}
+
+.ilustra-borda--ramo { width: 108px; height: 108px; top: 8%; right: 3vw; }
+.ilustra-borda--celula { width: 112px; height: 112px; bottom: 8%; right: 4vw; }
+
+/* --- 5.4 TIMELINE -------------------------------------------------------- */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+  padding-block: 1rem;
+}
+/* Linha central com traço irregular, como tinta no papel */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 3px;
+  margin-left: -1.5px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(--verde-salvia) 0 26px,
+      hsl(var(--verde-salvia-hsl) / .45) 26px 34px
+    );
+  opacity: .75;
+}
+
+.marco {
+  position: relative;
+  width: 50%;
+  padding-right: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+.marco:last-child { margin-bottom: 0; }
+.marco:nth-child(even) {
+  margin-left: 50%;
+  padding-right: 0;
+  padding-left: clamp(2rem, 4vw, 3.2rem);
+}
+.marco__ponto {
+  position: absolute;
+  top: 1.9rem;
+  right: -9px;
+  width: 18px; height: 18px;
+  border: 3px solid var(--verde-profundo);
+  border-radius: 50%;
+  background: var(--papel);
+  z-index: 2;
+}
+.marco:nth-child(even) .marco__ponto { right: auto; left: -9px; }
+
+.marco__card {
+  padding: 1.6rem 1.4rem 1.3rem;
+  background: var(--papel-alto);
+  border: 1px solid hsl(var(--ocre-hsl) / .35);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-card);
+}
+.marco:nth-child(odd)  .marco__card { transform: rotate(var(--rot-3)); }
+.marco:nth-child(even) .marco__card { transform: rotate(var(--rot-2)); }
+
+.marco__ano {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-lg);
+  font-weight: 500;
+  letter-spacing: .12em;
+  color: var(--ocre-texto);
+}
+.marco__titulo { margin: .2rem 0 .35rem; font-size: var(--texto-xl); }
+.marco__texto { font-size: var(--texto-sm); color: var(--tinta-suave); }
+
+/* Entrada discreta on-scroll (IntersectionObserver em script.js) */
+.marco[data-anim] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 520ms ease-out, transform 520ms ease-out;
+}
+.marco[data-anim].is-visivel { opacity: 1; transform: translateY(0); }
+
+.ilustra-borda--helice { width: 96px; height: 96px; top: 10%; right: 4vw; }
+
+/* --- 5.5 MAPA DE PESQUISA ------------------------------------------------ */
+/* Alinhado à esquerda, junto com o cabeçalho da seção — centralizar
+   deixaria a árvore fora do eixo do título. */
+.mapa { max-width: 760px; }
+
+.mapa__controles {
+  display: flex;
+  gap: .6rem;
+  margin-bottom: 1.6rem;
+}
+
+.arvore { display: grid; gap: .7rem; }
+
+.no { position: relative; }
+
+/* Nós como etiquetas de papel recortado */
+.no__rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem 1.05rem;
+  background: var(--papel-alto);
+  border: 1.5px solid hsl(var(--ocre-hsl) / .55);
+  border-radius: var(--raio);
+  box-shadow: 0 2px 5px hsl(var(--tinta-hsl) / .1);
+  font-family: var(--fonte-corpo);
+  font-size: var(--texto-base);
+  font-weight: 600;
+  text-align: left;
+  transition: background var(--transicao), border-color var(--transicao),
+              transform var(--transicao);
+}
+button.no__rotulo:hover {
+  border-color: var(--vinho-argila);
+  transform: translateX(2px);
+}
+.no__rotulo--folha {
+  font-weight: 400;
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  border-style: dashed;
+  border-color: hsl(var(--verde-salvia-hsl) / .6);
+  background: hsl(var(--verde-salvia-hsl) / .08);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Seta desenhada em CSS: gira ao expandir */
+.no__seta {
+  width: 0; height: 0;
+  border-left: 7px solid var(--verde-salvia);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: transform var(--transicao);
+}
+.no.is-aberto > .no__rotulo > .no__seta { transform: rotate(90deg); }
+.no.is-aberto > .no__rotulo { background: hsl(var(--verde-salvia-hsl) / .16); }
+
+/* Ramo: animação de altura real via grid-template-rows 0fr → 1fr */
+.no__ramo {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 340ms ease, opacity 240ms ease;
+}
+.no__ramo > .no__lista { min-height: 0; overflow: hidden; }
+.no.is-aberto > .no__ramo { grid-template-rows: 1fr; opacity: 1; }
+
+/* Conectores estilo desenho à mão.
+   O padding vertical entra só quando o ramo abre: padding de item de grid
+   não colapsa com 0fr, e sobraria uma faixa de ~14px no nó fechado. */
+.no__lista {
+  display: grid;
+  gap: .55rem;
+  margin-left: 1.6rem;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px dashed var(--verde-salvia);
+  transition: padding-block 340ms ease;
+}
+.no.is-aberto > .no__ramo > .no__lista { padding-block: .7rem .2rem; }
+.no__lista > .no::before {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: -1.5rem;
+  width: 1.25rem;
+  height: 2px;
+  background: var(--verde-salvia);
+  opacity: .8;
+}
+
+.ilustra-borda--placa { width: 104px; height: 104px; bottom: 10%; right: 4vw; }
+
+/* --- 5.6 CONTATO --------------------------------------------------------- */
+.secao--contato {
+  color: var(--sobre-escuro);
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+.secao--contato::before {
+  content: "";
+  position: absolute;
+  /* Rasgado só no topo (bordo com o Mapa, acima); base reta, colada ao
+     rodapé — nenhuma emenda entre os dois verdes. */
+  inset: -16px 0 0;
+  z-index: -1;
+  background: var(--verde-profundo);
+  clip-path: var(--recorte-topo);
+}
+.secao--contato .textura-papel { mix-blend-mode: overlay; opacity: .12; }
+.secao--contato .rotulo-secao span {
+  border-color: hsl(var(--ocre-hsl) / .8);
+  color: var(--ocre-claro);
+}
+
+.contato {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+
+.form {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  background: var(--papel-alto);
+  color: var(--tinta);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-card);
+  transform: rotate(var(--rot-3));
+}
+.campo { display: grid; gap: .35rem; }
+.campo label {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--verde-salvia-texto);
+}
+.campo input,
+.campo textarea {
+  padding: .65rem .8rem;
+  background: var(--papel);
+  border: 1.5px solid hsl(var(--ocre-hsl) / .5);
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
+  resize: vertical;
+  transition: border-color var(--transicao);
+}
+.campo input:focus,
+.campo textarea:focus { border-color: var(--verde-salvia); }
+.campo input::placeholder,
+.campo textarea::placeholder { color: hsl(var(--tinta-hsl) / .42); }
+
+/* Estados de erro em texto — validação nativa, sem JS */
+.campo__erro {
+  display: none;
+  font-size: var(--texto-xs);
+  color: var(--vinho-argila);
+}
+.campo input:user-invalid,
+.campo textarea:user-invalid { border-color: var(--vinho-argila); }
+.campo input:user-invalid ~ .campo__erro,
+.campo textarea:user-invalid ~ .campo__erro { display: block; }
+
+.form .botao { justify-self: start; }
+.form__ajuda {
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+  text-wrap: pretty;
+}
+
+.contato__lateral { padding-top: 1rem; }
+.contato__links { display: grid; gap: .7rem; }
+.contato__links a {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  color: var(--sobre-escuro);
+  text-decoration-color: hsl(var(--ocre-hsl) / .8);
+  text-underline-offset: 4px;
+  transition: color var(--transicao);
+}
+.contato__links a:hover { color: var(--ocre-claro); }
+.contato__nota {
+  margin-top: 1.4rem;
+  font-family: var(--fonte-manuscrita);
+  font-size: 1.3rem;
+  color: var(--sobre-escuro-suave);
+  transform: rotate(var(--rot-2));
+}
+
+
+/* ==========================================================================
+   06. RODAPÉ — papel aquarela + mix-blend-mode
+   ========================================================================== */
+
+.rodape {
+  position: relative;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+  background: var(--verde-profundo);
+  color: var(--sobre-escuro);
+  isolation: isolate;
+  overflow: hidden;
+}
+/* As manchas do rodapé pendem para o topo, complementando as da Contato
+   (que pendem para a base) — o padrão parece escorrer de uma seção para
+   a outra em vez de recomeçar do zero na emenda. */
+.rodape .textura-aquarela {
+  background:
+    radial-gradient(48% 58% at 20% 8%, hsl(var(--papel-hsl) / .5) 0%, transparent 70%),
+    radial-gradient(40% 50% at 78% 14%, hsl(var(--verde-salvia-hsl) / .65) 0%, transparent 72%),
+    radial-gradient(50% 62% at 55% 46%, hsl(var(--ocre-hsl) / .4) 0%, transparent 74%);
+}
+.rodape .textura-papel { mix-blend-mode: overlay; opacity: .12; }
+
+.rodape__conteudo {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+}
+.rodape__nome {
+  font-family: var(--fonte-display);
+  font-size: var(--texto-xl);
+  font-weight: 600;
+  font-style: italic;
+}
+.rodape__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.4rem;
+}
+.rodape__links a {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-sm);
+  text-decoration-color: hsl(var(--ocre-hsl) / .8);
+  text-underline-offset: 4px;
+}
+.rodape__links a:hover { color: var(--ocre-claro); }
+.rodape__copy {
+  font-family: var(--fonte-mono);
+  font-size: var(--texto-xs);
+  letter-spacing: .1em;
+  color: var(--sobre-escuro-suave);
+}
+
+
+/* ==========================================================================
+   07. RESPONSIVO (mobile-first no comportamento: tudo empilha e nada corta)
+   ========================================================================== */
+
+@media (max-width: 980px) {
+  .projetos { grid-template-columns: minmax(0, 1fr); }
+  .card--projeto:nth-child(n) { transform: rotate(var(--rot, 0deg)); }
+  .card--projeto:nth-child(n):hover { transform: rotate(var(--rot, 0deg)) translateY(-3px); }
+  .cases { grid-template-columns: minmax(0, 1fr); }
+  .card--case:nth-of-type(2) { transform: rotate(var(--rot-4)); }
+  .contato { grid-template-columns: minmax(0, 1fr); }
+  .contato__lateral { padding-top: 0; }
+  .extensao { grid-template-columns: minmax(0, 1fr); }
+  .checklist { position: static; }
+  .lateral-extensao { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
+  .ilustra-lateral { margin: 0; }
+
+  /* Sem moldura lateral livre: as decorações de borda saem de cena. */
+  .ilustra-borda { display: none; }
+}
+
+/* Menu sanduíche: abaixo de 768px a navegação vira um painel dobrável. */
+@media (max-width: 768px) {
+  .menu-botao { display: inline-flex; }
+
+  .topo__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: .3rem var(--gutter) 1rem;
+    background: hsl(var(--papel-hsl) / .97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid hsl(var(--ocre-hsl) / .4);
+    box-shadow: 0 12px 24px hsl(var(--tinta-hsl) / .12);
+    /* Painel sobreposto: fecha com fade+slide, sem reflow do conteúdo. */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+  }
+  .topo__nav.is-aberto {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .topo__nav > a {
+    padding: .85rem .2rem;
+    border-bottom: 1px dashed hsl(var(--ocre-hsl) / .35);
+    font-size: var(--texto-sm);
+  }
+  .topo__nav > a:last-child { border-bottom: 0; }
+  .topo__nav a::after { display: none; }
+}
+
+@media (max-width: 640px) {
+  /* Hero empilha: nome em cima, foto embaixo */
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .hero__coluna { margin-top: .5rem; }
+  .numeros { gap: 1rem 1.6rem; }
+
+  /* Ilustrações reposicionam para as bordas livres, sem cortar. O coração
+     desce um pouco para não tocar o kicker "Ciências Biomédicas · USP". */
+  .ilustra--coracao   { width: 120px; height: 82px; top: 4.5rem; right: -1.4rem; }
+  .ilustra--helice    { width: 54px;  height: 54px; bottom: 1rem; left: -.5rem; }
+  .ilustra--ramo      { display: none; }
+  .ilustra--neuronio  { width: 60px;  height: 60px; bottom: 34%; left: -.5rem; }
+  .transbordo--placa  { width: 72px;  height: 72px; right: 4vw; bottom: -36px; }
+  .transbordo--frasco { width: 60px;  height: 60px; bottom: -30px; }
+
+  /* Timeline vira coluna única com a linha à esquerda */
+  .timeline::before { left: 9px; margin-left: 0; }
+  .marco,
+  .marco:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 2.2rem;
+    padding-right: 0;
+  }
+  .marco__ponto,
+  .marco:nth-child(even) .marco__ponto { left: 1px; right: auto; }
+
+  /* Árvore: alvos de toque confortáveis e menos recuo por nível */
+  .no__rotulo { padding: .7rem 1rem; }
+  .no__lista { margin-left: .5rem; padding-left: 1.1rem; }
+  .no__lista > .no::before { left: -1.1rem; width: .9rem; }
+
+  .modalidades__lista { grid-template-columns: minmax(0, 1fr); }
+  .card--projeto .selo-carimbo { right: -18px; bottom: -22px; }
+  /* No mobile o selo do Atlas desce para o rodapé do card, longe do título */
+  .card--destaque { padding-bottom: 4rem; }
+  .card--destaque .selo-carimbo { right: 50%; left: auto; top: auto; bottom: -30px; transform: translateX(50%) rotate(var(--rot-carimbo)); }
+  .lateral-extensao { grid-template-columns: 1fr; }
+  .ilustra-lateral { margin: .5rem auto 0; }
+  .contato__links a,
+  .rodape__links a { display: inline-block; padding-block: .4rem; }
+}
+
+@media (max-width: 420px) {
+  .ilustra--neuronio { display: none; }
+  .numeros li { max-width: 100%; }
+}
+
+
+/* ==========================================================================
+   08. ACESSIBILIDADE / MOVIMENTO REDUZIDO
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Nada deve depender de animação para ficar visível */
+  .ilustra { opacity: .5; transform: none; }
+  .ilustra--coracao { opacity: .72; }
+  .marco[data-anim] { opacity: 1; transform: none; }
+}
+
+@media (prefers-contrast: more) {
+  :root { --opacidade-textura: .02; }
+  .ilustra, .ilustra-borda, .ilustra-solta, .transbordo { opacity: .25; }
+}
+
+@media print {
+  .topo, .hero__ilustracoes, .ilustra-borda, .transbordo,
+  .mapa__controles, .textura-papel { display: none !important; }
+  .no__ramo { grid-template-rows: 1fr; opacity: 1; }
+  .card, .marco__card, .form, .polaroid { transform: none !important; box-shadow: none; }
+}

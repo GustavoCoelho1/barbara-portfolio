@@ -1,0 +1,17 @@
+# Sistema operacional
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Dependências (o projeto não usa, mas evita commit acidental)
+node_modules/
+
+# Arquivos temporários
+*.log
+*.tmp
