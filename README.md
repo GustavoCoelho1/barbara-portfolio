@@ -4,7 +4,7 @@ Portfólio científico de página única para Barbara Sganga, graduanda em
 Ciências Biomédicas na USP. HTML, CSS e JavaScript puros — sem framework,
 sem build. Presente para alguém próximo, construído do zero com Claude Code.
 
-🔗 **Site publicado**: _a publicar — ver seção Publicação abaixo_
+🔗 **Site publicado**: https://gustavocoelho1.github.io/barbara-portfolio/
 
 ![Hero do portfólio](documents/screenshots/01-hero.jpg)
 
@@ -127,4 +127,4 @@ ver [documents/DESIGN.md](documents/DESIGN.md) e
 ## Publicação
 
 Repositório público no GitHub, publicado via GitHub Pages a partir da branch
-`main`. Link no topo deste documento assim que o deploy for confirmado.
+`main` — https://github.com/GustavoCoelho1/barbara-portfolio
