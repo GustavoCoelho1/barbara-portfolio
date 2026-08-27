@@ -168,7 +168,7 @@ dependência externa nenhuma.
 ├── style.css                design system completo (tokens, componentes)
 ├── script.js                 4 responsabilidades, sem dependências
 ├── assets/
-│   ├── docs/                currículo em PDF
+│   ├── docs/                currículo em PDF (português)
 │   └── img/                 foto de perfil
 └── documents/
     ├── DESIGN.md            decisões diretivas de design

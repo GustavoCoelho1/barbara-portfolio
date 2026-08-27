@@ -34,7 +34,7 @@ index.html            marcação das 7 seções + sprite SVG de ilustrações
 style.css              tokens + todo o estilo (ver DESIGN.md para a lógica)
 script.js               4 responsabilidades, ver §5
 assets/img/            foto de perfil (foto_perfil.jpeg — já é a foto real)
-assets/docs/            currículo em PDF (inglês)
+assets/docs/            currículo em PDF (português)
 documents/              DESIGN.md, CONTEXT.md (este arquivo), screenshots/
 README.md              história do processo de criação (raiz)
 ```
@@ -142,9 +142,8 @@ Consequências diretas dessa leitura:
   conteúdo mockado não existe mais no projeto.
 - **Contato**: só e-mail e LinkedIn (nunca telefone) — decisão deliberada
   para evitar exposição de número de celular numa página pública indexável.
-- **Currículo linkado como PDF em inglês**, rotulado como tal nos botões —
-  é o material real disponível; não foi reescrito em português porque o
-  documento fonte é dela.
+- **Currículo linkado como PDF em português** — versão atualizada fornecida
+  pela própria Barbara, substituindo a versão em inglês usada anteriormente.
 
 ## 8. Decisões técnicas notáveis (bugs reais corrigidos, não cosméticos)
 
@@ -207,8 +206,6 @@ limitação técnica.
 
 - [ ] Substituir a citação do Hero (hoje atribuída a Einstein) por uma
       frase escolhida pela própria Barbara, se ela quiser.
-- [ ] Revisar o PDF do currículo na fonte — tem erros de digitação no
-      original ("INTERNSHI", "Reasearch").
 - [ ] Adicionar link do Lattes quando/se ela tiver um (comentário já
       preparado no HTML, seção Contato).
 - [ ] Nenhuma outra imagem além da foto de perfil está pendente — todas as
